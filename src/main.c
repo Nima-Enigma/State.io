@@ -3,7 +3,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL2_gfxPrimitives.h>
 #include <time.h>
-//#include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_image.h>
 
 const int SCREEN_WIDTH = 1500;
@@ -77,17 +77,17 @@ void give_colors(region regions [50]){
 void make_map(int map [1500][800] ,region regions[50] , region regions_fill[50], direction directions[6],int head ){
     for(int j=0 ; j<6 ; j++) {
         if(check_availability(map, regions_fill , directions[j] , head)){
-                regions[reg_head + 1].c_x = regions_fill[head].c_x + directions[j].x;
-                regions[reg_head + 1].c_y = regions_fill[head].c_y + directions[j].y;
-                regions_fill[head +1].c_x = regions_fill[head].c_x + directions[j].x;
-                regions_fill[head +1].c_y = regions_fill[head].c_y + directions[j].y;
-                regions[reg_head + 1].color = 0xffccffff;
-                if(rand()%3 != 0) {
+            regions[reg_head + 1].c_x = regions_fill[head].c_x + directions[j].x;
+            regions[reg_head + 1].c_y = regions_fill[head].c_y + directions[j].y;
+            regions_fill[head +1].c_x = regions_fill[head].c_x + directions[j].x;
+            regions_fill[head +1].c_y = regions_fill[head].c_y + directions[j].y;
+            regions[reg_head + 1].color = 0xffccffff;
+            if(rand()%3 != 0) {
                 if (rand() % 2 == 0)regions[reg_head + 1].r = 110;
                 else regions[reg_head + 1].r = 90; }
-                else reg_head --;
-                reg_head++;
-                head++;
+            else reg_head --;
+            reg_head++;
+            head++;
             make_map(map , regions , regions_fill , directions , head );
         }
     }
@@ -96,20 +96,40 @@ void make_map(int map [1500][800] ,region regions[50] , region regions_fill[50],
 void draw_shapes(region regions[50] , SDL_Renderer *sdlRenderer){
     int i=0;
     while(regions[i].c_y !=0)
-        {
+    {
         if(regions[i].r == 0) {
             i++;
             continue;
         }
         if(regions[i].color != 0xaac0c0c0)
-            filledCircleRGBA(sdlRenderer, regions[i].c_x, regions[i].c_y , regions[i].r+5 , 0 , 0 , 0 , 255);
+            filledCircleRGBA(sdlRenderer, regions[i].c_x - 3, regions[i].c_y + 3, regions[i].r+5 , 0 , 0 , 0 , 255);
         else{
             aacircleRGBA(sdlRenderer, regions[i].c_x, regions[i].c_y , regions[i].r , 0 , 0 , 0 , 255);
         }
         filledCircleColor(sdlRenderer, regions[i].c_x, regions[i].c_y , regions[i].r , regions[i].color);
-            i++;
-        }
+        i++;
     }
+}
+void soldiers(TTF_Font * font , region regions[50] , SDL_Renderer *sdlRenderer){
+    int i=0;
+    while(regions[i].c_y !=0) {
+        char num[3];
+        int copy = regions[i].soldiers;
+        if(copy == 0) {
+            num[0]='0';
+        }
+        for(int j=0 ;copy !=0 && j < 3;j++,copy/=10){
+            num[j]=(copy%10 + 48);
+        }
+        SDL_Rect yo = {regions[i].c_x -10 , regions[i].c_y -10 , 30, 30};
+        SDL_Color text_color = {0, 0, 0, 255};
+        SDL_Surface *yoo = TTF_RenderText_Solid(font,num  , text_color);
+        SDL_Texture * text_texture = SDL_CreateTextureFromSurface(sdlRenderer, yoo);
+        SDL_RenderCopy(sdlRenderer, text_texture , NULL, &yo);
+        i++;
+    }
+
+}
 
 int main()
 {
@@ -125,24 +145,26 @@ int main()
         printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
         return 0;
     }
-    //TTF_Init();
+    TTF_Init();
     SDL_Window *sdlWindow = SDL_CreateWindow("Test_Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH,
                                              SCREEN_HEIGHT, SDL_WINDOW_OPENGL);
-
     SDL_Renderer *sdlRenderer = SDL_CreateRenderer(sdlWindow, -1, SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_ACCELERATED);
-    SDL_Rect background = {0 , 0 , 1500 , 800};
-    int background_w = 1500 , background_h = 800;
-    SDL_Texture * Background = NULL;
-    Background = IMG_LoadTexture(sdlRenderer , "sea.jpeg");
-    SDL_QueryTexture(Background , NULL , NULL , &background_h , &background_w);
-    SDL_RenderCopy(sdlRenderer , Background , NULL , &background);
+    SDL_Surface * surface = IMG_Load("sea.jpg");
+    SDL_Texture* background = SDL_CreateTextureFromSurface(sdlRenderer, surface);
+    SDL_Rect rect = {0 , 0 , 1500 , 1500};
+    TTF_Font * font = TTF_OpenFont("fonts/arial.ttf" , 600);
     while(shallExit == SDL_FALSE) {
         //SDL_SetRenderDrawColor(sdlRenderer, 0x99, 0xff, 0xff, 0xff);
         SDL_RenderClear(sdlRenderer);
+        SDL_RenderCopy(sdlRenderer , background , NULL , &rect);
         draw_shapes(regions , sdlRenderer);
-
+        soldiers(font , regions , sdlRenderer);
         SDL_RenderPresent(sdlRenderer);
         SDL_Event sdlEvent;
+        SDL_Delay(2000);
+        for(int i=0 ; regions[i].c_y !=0 ; i++){
+            if(regions[i].soldiers != 50)
+            regions[i].soldiers++;}
         while (SDL_PollEvent(&sdlEvent)) {
             switch (sdlEvent.type) {
                 case SDL_QUIT:
@@ -152,7 +174,7 @@ int main()
         }
     }
     SDL_DestroyWindow(sdlWindow);
-    //TTF_Quit();
+    TTF_Quit();
     SDL_Quit();
     return 0;
 }
