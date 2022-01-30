@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/nima/Desktop/state.io/src/main.c
+/home/nima/Desktop/state.io/src/gameplay.c
 stdio.h
 -
 stdbool.h
@@ -21,4 +21,36 @@ SDL2/SDL_ttf.h
 -
 SDL2/SDL_image.h
 -
+main.h
+/home/nima/Desktop/state.io/src/main.h
+
+/home/nima/Desktop/state.io/src/main.c
+stdlib.h
+-
+stdio.h
+-
+gameplay.c
+/home/nima/Desktop/state.io/src/gameplay.c
+menu.c
+/home/nima/Desktop/state.io/src/menu.c
+
+/home/nima/Desktop/state.io/src/main.h
+
+/home/nima/Desktop/state.io/src/menu.c
+stdio.h
+-
+stdbool.h
+-
+SDL2/SDL.h
+-
+SDL2/SDL2_gfxPrimitives.h
+-
+time.h
+-
+SDL2/SDL_ttf.h
+-
+SDL2/SDL_image.h
+-
+main.h
+/home/nima/Desktop/state.io/src/main.h
 
