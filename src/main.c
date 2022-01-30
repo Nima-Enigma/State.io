@@ -63,7 +63,7 @@ int check_availability(int map[1500][800],region regions[50], direction next , i
 void give_colors(region regions [50]){
     int i=0;
     while(regions[i].c_y !=0){
-        if(rand()%5==0)regions[i].color = 0xaac0c0c0;
+        if(rand()%5==0)regions[i].color = 0xffc0c0c0;
         i++;
     }
     regions[0].color = 0xff0000cc;
@@ -101,35 +101,57 @@ void draw_shapes(region regions[50] , SDL_Renderer *sdlRenderer){
             i++;
             continue;
         }
-        if(regions[i].color != 0xaac0c0c0)
-            filledCircleRGBA(sdlRenderer, regions[i].c_x - 3, regions[i].c_y + 3, regions[i].r+5 , 0 , 0 , 0 , 255);
-        else{
-            aacircleRGBA(sdlRenderer, regions[i].c_x, regions[i].c_y , regions[i].r , 0 , 0 , 0 , 255);
-        }
-        filledCircleColor(sdlRenderer, regions[i].c_x, regions[i].c_y , regions[i].r , regions[i].color);
+        filledEllipseRGBA(sdlRenderer, regions[i].c_x + 2, regions[i].c_y + 2, regions[i].r+14 ,regions[i].r-12 , 0 , 0 , 0 , 255);
+        filledEllipseColor(sdlRenderer, regions[i].c_x, regions[i].c_y , regions[i].r+10 , regions[i].r-15 , regions[i].color);
         i++;
     }
 }
-void soldiers(TTF_Font * font , region regions[50] , SDL_Renderer *sdlRenderer){
-    int i=0;
-    while(regions[i].c_y !=0) {
+
+int num_digit(int num){
+    int count = 0;
+    while(num != 0) {
+        num /= 10;
+        count++;
+    }
+    return count;
+}
+void soldiers(TTF_Font * font , region regions[50] , SDL_Renderer *sdlRenderer) {
+    int i = 0;
+    while (regions[i].c_y != 0) {
+        if(regions[i].color != 0xffc0c0c0){
         char num[3];
         int copy = regions[i].soldiers;
-        if(copy == 0) {
-            num[0]='0';
+        if (copy == 0) {
+            num[0] = '0';
         }
-        for(int j=0 ;copy !=0 && j < 3;j++,copy/=10){
-            num[j]=(copy%10 + 48);
+        for (int j = num_digit(copy) - 1; copy != 0; j--, copy /= 10) {
+            num[j] = (copy % 10 + '0');
         }
-        SDL_Rect yo = {regions[i].c_x -10 , regions[i].c_y -10 , 30, 30};
+        SDL_Rect yo = {regions[i].c_x - 10, regions[i].c_y + 10, 20, 25};
         SDL_Color text_color = {0, 0, 0, 255};
-        SDL_Surface *yoo = TTF_RenderText_Solid(font,num  , text_color);
-        SDL_Texture * text_texture = SDL_CreateTextureFromSurface(sdlRenderer, yoo);
-        SDL_RenderCopy(sdlRenderer, text_texture , NULL, &yo);
+        SDL_Surface *yoo = TTF_RenderText_Solid(font, num, text_color);
+        SDL_Texture *text_texture = SDL_CreateTextureFromSurface(sdlRenderer, yoo);
+        SDL_RenderCopy(sdlRenderer, text_texture, NULL, &yo);}
         i++;
     }
-
 }
+
+void draw_barracks(SDL_Renderer * sdlRenderer,region regions[50]){
+    int i=0;
+    while(regions[i].c_y !=0) {
+        if(regions[i].color == 0xffccffff){
+            SDL_Surface *surface_b = IMG_Load("tower.png");
+            SDL_Texture *barracks = SDL_CreateTextureFromSurface(sdlRenderer, surface_b);SDL_Rect rect_b = {regions[i].c_x - 80, regions[i].c_y - 100, 600 / 5, 549 / 5};
+            SDL_RenderCopy(sdlRenderer, barracks, NULL, &rect_b);
+        }
+        if(regions[i].color !=0xffccffff && regions[i].color !=0xffc0c0c0) {
+            SDL_Surface *surface_b = IMG_Load("barracks.png");
+            SDL_Texture *barracks = SDL_CreateTextureFromSurface(sdlRenderer, surface_b);SDL_Rect rect_b = {regions[i].c_x - 57, regions[i].c_y - 100, 600 / 5, 549 / 5};
+            SDL_RenderCopy(sdlRenderer, barracks, NULL, &rect_b);
+        }
+        i++;
+        }
+    }
 
 int main()
 {
@@ -151,20 +173,21 @@ int main()
     SDL_Renderer *sdlRenderer = SDL_CreateRenderer(sdlWindow, -1, SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_ACCELERATED);
     SDL_Surface * surface = IMG_Load("sea.jpg");
     SDL_Texture* background = SDL_CreateTextureFromSurface(sdlRenderer, surface);
-    SDL_Rect rect = {0 , 0 , 1500 , 1500};
-    TTF_Font * font = TTF_OpenFont("fonts/arial.ttf" , 600);
+    SDL_Rect rect = {0 , 0 , 1500 , 800};
+    TTF_Font * font = TTF_OpenFont("fonts/arial.ttf" , 100);
     while(shallExit == SDL_FALSE) {
         //SDL_SetRenderDrawColor(sdlRenderer, 0x99, 0xff, 0xff, 0xff);
         SDL_RenderClear(sdlRenderer);
         SDL_RenderCopy(sdlRenderer , background , NULL , &rect);
         draw_shapes(regions , sdlRenderer);
         soldiers(font , regions , sdlRenderer);
+        draw_barracks(sdlRenderer,regions);
         SDL_RenderPresent(sdlRenderer);
         SDL_Event sdlEvent;
         SDL_Delay(2000);
         for(int i=0 ; regions[i].c_y !=0 ; i++){
-            if(regions[i].soldiers != 50)
-            regions[i].soldiers++;}
+            if(regions[i].soldiers != 50 && regions[i].color !=0xffccffff && regions[i].color !=0xaac0c0c0)
+                regions[i].soldiers++;}
         while (SDL_PollEvent(&sdlEvent)) {
             switch (sdlEvent.type) {
                 case SDL_QUIT:
