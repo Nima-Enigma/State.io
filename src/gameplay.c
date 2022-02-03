@@ -114,7 +114,8 @@ void draw_shapes(region regions[50] , SDL_Renderer *sdlRenderer){
         }
         if(regions[i].existence){
         filledEllipseRGBA(sdlRenderer, regions[i].c_x + 2, regions[i].c_y + 2, regions[i].r+14 ,regions[i].r-12 , 0 , 0 , 0 , 255);
-        filledEllipseColor(sdlRenderer, regions[i].c_x, regions[i].c_y , regions[i].r+10 , regions[i].r-15 , regions[i].color);}
+        filledEllipseColor(sdlRenderer, regions[i].c_x, regions[i].c_y , regions[i].r+10 , regions[i].r-15 , regions[i].color);
+        }
         i++;
     }
 }
@@ -131,14 +132,15 @@ void nums(TTF_Font * font , region regions[50] , SDL_Renderer *sdlRenderer) {
     int i = 0;
     while (regions[i].c_y != 0) {
         if(regions[i].color != 0xffc0c0c0 && regions[i].existence == 1){
-            char num[3];
-            sprintf(num ,"%0.f" , regions[i].soldiers);
+            char num[5];
+            sprintf(num ,"%d" , regions[i].soldiers);
             SDL_Rect yo = {regions[i].c_x - 10, regions[i].c_y + 10, 20, 25};
             SDL_Color text_color = {0, 0, 0, 255};
             SDL_Surface *yoo = TTF_RenderText_Solid(font, num, text_color);
             SDL_Texture *text_texture = SDL_CreateTextureFromSurface(sdlRenderer, yoo);
             SDL_RenderCopy(sdlRenderer, text_texture, NULL, &yo);
             SDL_DestroyTexture(text_texture);
+            SDL_FreeSurface(yoo);
         }
         i++;
     }
@@ -162,7 +164,7 @@ void draw_barracks(SDL_Renderer * sdlRenderer,region regions[50], SDL_Surface *s
 }
 
 void draw_arrow(SDL_Renderer *sdlRenderer , region regions [50] , SDL_Surface * arrow_sur){
-    if(selected != -1) {
+    if(selected != -1){
         SDL_Texture *tex = SDL_CreateTextureFromSurface(sdlRenderer, arrow_sur);
         SDL_Rect rect_b = {regions[selected].c_x - 50, regions[selected].c_y - 190, 100, 100};
         SDL_RenderCopy(sdlRenderer, tex, NULL, &rect_b);
@@ -176,13 +178,17 @@ void attack(soldier army [200]  ,region regions[50] ){
             int a = regions[i].soldiers;
             for(int m=0 ; m <a ; m++){
                 if(army_head == 200)army_head =0;
+                army[army_head].dest_x = regions[regions[i].attack].c_x -30;
+                army[army_head].dest_y = regions[regions[i].attack].c_y -30;
+                army[army_head].target = regions[i].attack;
+                army[army_head].color = regions[i].color;
                 army[army_head].x = rand()%100 + regions[i].c_x - 60;
                 army[army_head].y = rand()%100 + regions[i].c_y - 60;
-                float cos = (regions[regions[i].attack].c_x - army[army_head].x) / sqrt(pow((army[army_head].y - regions[regions[i].attack].c_y ),2)+pow((army[army_head].x - regions[regions[i].attack].c_x),2));
-                float sin = (regions[regions[i].attack].c_y - army[army_head].y ) / sqrt(pow((army[army_head].y - regions[regions[i].attack].c_y ),2)+pow((army[army_head].x - regions[regions[i].attack].c_x),2));
-                army[army_head].v_y = sin*7;
-                army[army_head].v_x = cos*7;
-                army[army_head].existance = 1;
+                float cos = (regions[regions[i].attack].c_x -30 - army[army_head].x) / sqrt(pow((army[army_head].y - regions[regions[i].attack].c_y) + 30,2)+pow((army[army_head].x - regions[regions[i].attack].c_x ) +30,2));
+                float sin = (regions[regions[i].attack].c_y -30 - army[army_head].y ) / sqrt(pow((army[army_head].y - regions[regions[i].attack].c_y) + 30,2)+pow((army[army_head].x - regions[regions[i].attack].c_x ) +30,2));
+                army[army_head].v_y = sin* 7;
+                army[army_head].v_x = cos* 7;
+                army[army_head].existence = 1;
                 army_head ++;
             }
             regions[i].soldiers = 0;
@@ -191,14 +197,20 @@ void attack(soldier army [200]  ,region regions[50] ){
     }
 }
 
-void draw_soldiers(SDL_Renderer *sdlRenderer ,region regions[50] ,SDL_Surface * sol_sur ,soldier army[200] ,SDL_RendererFlip flip){
+void draw_soldiers_and_attack(SDL_Renderer *sdlRenderer ,region regions[50] ,SDL_Surface * sol_sur ,soldier army[200] ,SDL_RendererFlip flip){
     for(int i = 0 ; i<200 ; i++) {
-        if(army[i].existance == 0)continue;
+        if(army[i].existence == 0)continue;
+        if(army[i].dest_x - 5 < army[i].x && army[i].x < army[i].dest_x + 5 && army[i].dest_y - 5 < army[i].y && army[i].y < army[i].dest_y + 5) {
+            army[i].existence = 0;
+            if(army[i].color == regions[army[i].target].color)regions[army[i].target].soldiers ++;
+            else regions[army[i].target].soldiers --;
+            if(regions[army[i].target].soldiers < 0)regions[army[i].target].color = army[i].color;
+        }
         army[i].x += army[i].v_x;
         army[i].y += army[i].v_y;
         SDL_Texture *tex = SDL_CreateTextureFromSurface(sdlRenderer, sol_sur);
         SDL_Rect rect_b = {army[i].x, army[i].y, 60, 60};
-        if(army[i].v_x > 0)
+        if(army[i].v_x < 0)
             SDL_RenderCopy(sdlRenderer, tex, NULL, &rect_b);
         else
             SDL_RenderCopyEx(sdlRenderer, tex, NULL, &rect_b, 0 , 0 , flip);
@@ -242,7 +254,7 @@ int Run(int reg_count , int player_count)
         SDL_RenderClear(sdlRenderer);
         background(bg_surface , sdlRenderer);
         draw_shapes(regions , sdlRenderer);
-        draw_soldiers(sdlRenderer ,regions ,sol_sur , army , flip);
+        draw_soldiers_and_attack(sdlRenderer ,regions ,sol_sur , army , flip);
         nums(font , regions , sdlRenderer);
         draw_barracks(sdlRenderer,regions,surface_tower,surface_barracks);
         draw_arrow(sdlRenderer , regions , arrow_sur);
@@ -250,8 +262,8 @@ int Run(int reg_count , int player_count)
         SDL_Event sdlEvent;
         SDL_Delay(1000/FPS);
         for(int i=0 ; regions[i].c_y !=0 ; i++){
-            if(regions[i].soldiers < 50.2 && regions[i].color !=0xffccffff && regions[i].color !=0xaac0c0c0)
-                regions[i].soldiers+=0.04;}
+            if(regions[i].soldiers < 50.3 && regions[i].color !=0xffccffff && regions[i].color !=0xaac0c0c0)
+                regions[i].soldiers+=1;}
         while (SDL_PollEvent(&sdlEvent)) {
             switch (sdlEvent.type) {
                 case SDL_QUIT:
@@ -261,7 +273,7 @@ int Run(int reg_count , int player_count)
                     for(int i=0 ; i <= reg_head ; i++) {
                         if (regions[i].existence == 0)continue;
                         if (pow(sdlEvent.motion.x - regions[i].c_x, 2) + pow(sdlEvent.motion.y - regions[i].c_y, 2) <
-                            pow(regions[i].r_cpy - 30, 2)) {
+                            pow(regions[i].r_cpy - 30, 2)){
                             regions[i].r = regions[i].r_cpy + 10;
                         } else
                             regions[i].r = regions[i].r_cpy;
@@ -281,6 +293,7 @@ int Run(int reg_count , int player_count)
                             regions[selected].attack = i;
                         }
                     }
+                    break;
             }
         }
     }

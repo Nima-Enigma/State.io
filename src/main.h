@@ -16,7 +16,7 @@ int selected = -1;
 
 typedef struct region{
     int existence;
-    float soldiers;
+    int soldiers;
     Uint32 color;
     Sint16 c_x;
     Sint16 c_y;
@@ -30,8 +30,11 @@ typedef struct soldier{
     float y;
     float v_x;
     float v_y;
-    int team ;
-    int existance;
+    int target;
+    int existence;
+    Uint32 color;
+    int dest_x;
+    int dest_y;
 }soldier;
 
 typedef struct direction{
