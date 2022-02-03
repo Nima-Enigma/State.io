@@ -64,7 +64,7 @@ void colors_init(Uint32 colors[10]){
     colors[0]= 0xff0000cc; colors[1]= 0xff00cc00; colors[2]= 0xffcc0066; colors[3]= 0xffe3cca9; colors[4]= 0xff3fd0f4; colors[5]= 0xff0054d3 ; colors[6]= 0xffd39bc3 ; colors[7]= 0xfff1f0ec ; colors[8]= 0xff9db345 ; colors[9]= 0xffaab0e6 ;
 }
 
-void give_colors(region regions [50] ,int reg_count ,int player_count ,int colors[10]){
+void give_colors(region regions [50] ,int reg_count ,int player_count , Uint32 colors[10]){
     for(int i=0 ; i<player_count ; i++){
         int a = rand()%(reg_head);
         if(regions[a].color == 0xffccffff){
@@ -172,12 +172,12 @@ void draw_arrow(SDL_Renderer *sdlRenderer , region regions [50] , SDL_Surface * 
     }
 }
 
-void attack(soldier army [200]  ,region regions[50] ){
+void attack(soldier army [300]  ,region regions[50] ){
     for(int i=0 ; i<=reg_head ; i++){
         if(regions[i].attack != -1 && regions[i].existence ==1){
             int a = regions[i].soldiers;
             for(int m=0 ; m <a ; m++){
-                if(army_head == 200)army_head =0;
+                if(army_head == 300)army_head =0;
                 army[army_head].dest_x = regions[regions[i].attack].c_x -30;
                 army[army_head].dest_y = regions[regions[i].attack].c_y -30;
                 army[army_head].target = regions[i].attack;
@@ -185,7 +185,7 @@ void attack(soldier army [200]  ,region regions[50] ){
                 army[army_head].x = rand()%100 + regions[i].c_x - 60;
                 army[army_head].y = rand()%100 + regions[i].c_y - 60;
                 float cos = (regions[regions[i].attack].c_x -30 - army[army_head].x) / sqrt(pow((army[army_head].y - regions[regions[i].attack].c_y) + 30,2)+pow((army[army_head].x - regions[regions[i].attack].c_x ) +30,2));
-                float sin = (regions[regions[i].attack].c_y -30 - army[army_head].y ) / sqrt(pow((army[army_head].y - regions[regions[i].attack].c_y) + 30,2)+pow((army[army_head].x - regions[regions[i].attack].c_x ) +30,2));
+                float sin = (regions[regions[i].attack].c_y -30 - army[army_head].y) / sqrt(pow((army[army_head].y - regions[regions[i].attack].c_y) + 30,2)+pow((army[army_head].x - regions[regions[i].attack].c_x ) +30,2));
                 army[army_head].v_y = sin* 7;
                 army[army_head].v_x = cos* 7;
                 army[army_head].existence = 1;
@@ -197,19 +197,31 @@ void attack(soldier army [200]  ,region regions[50] ){
     }
 }
 
-void draw_soldiers_and_attack(SDL_Renderer *sdlRenderer ,region regions[50] ,SDL_Surface * sol_sur ,soldier army[200] ,SDL_RendererFlip flip){
-    for(int i = 0 ; i<200 ; i++) {
+void draw_soldiers_and_attack(SDL_Renderer *sdlRenderer ,region regions[50] , SDL_Surface * sol_sur[10] ,soldier army[300] ,SDL_RendererFlip flip , Uint32 colors[10]){
+    for(int i = 0 ; i<300 ; i++) {
+        if(army[i].existence == 0)continue;
+        for(int j = i+1 ; j<300 ; j++){
+            if(army[i].color != army[j].color && army[i].x-army[j].x > -10 && army[i].x-army[j].x < 10 && army[i].y-army[j].y > -10 && army[i].y-army[j].y < 10 && army[j].existence==1){
+                army[i].existence = 0 ;
+                army[j].existence = 0 ;
+                break;
+            }
+        }
         if(army[i].existence == 0)continue;
         if(army[i].dest_x - 5 < army[i].x && army[i].x < army[i].dest_x + 5 && army[i].dest_y - 5 < army[i].y && army[i].y < army[i].dest_y + 5) {
             army[i].existence = 0;
             if(army[i].color == regions[army[i].target].color)regions[army[i].target].soldiers ++;
             else regions[army[i].target].soldiers --;
-            if(regions[army[i].target].soldiers < 0)regions[army[i].target].color = army[i].color;
+            if(regions[army[i].target].soldiers <1)regions[army[i].target].color = army[i].color;
         }
         army[i].x += army[i].v_x;
         army[i].y += army[i].v_y;
-        SDL_Texture *tex = SDL_CreateTextureFromSurface(sdlRenderer, sol_sur);
-        SDL_Rect rect_b = {army[i].x, army[i].y, 60, 60};
+        int j=0;
+        for(; j<10 ; j++){
+            if(army[i].color == colors[j])break;
+        }
+        SDL_Texture *tex = SDL_CreateTextureFromSurface(sdlRenderer, sol_sur[j]);
+        SDL_Rect rect_b = {army[i].x, army[i].y, 80, 80};
         if(army[i].v_x < 0)
             SDL_RenderCopy(sdlRenderer, tex, NULL, &rect_b);
         else
@@ -221,11 +233,24 @@ void draw_soldiers_and_attack(SDL_Renderer *sdlRenderer ,region regions[50] ,SDL
 int Run(int reg_count , int player_count)
 {
     Mix_OpenAudio(44100,MIX_DEFAULT_FORMAT,2,2048);
-    Mix_Music *start = Mix_LoadMUS(".mp3");
+    Mix_Music *mio = Mix_LoadMUS("music2.mp3");
+    Mix_PlayMusic(mio,-1);
     Uint32 colors [10];
     region regions[50];
     region regions_fill[50];
-    soldier army[200];
+    soldier army[300];
+    SDL_Surface * sol_sur[10];
+    int counter = 0 ;
+    sol_sur[0] = IMG_Load("soldier.png");
+    sol_sur[1] = IMG_Load("soldier2.png");
+    sol_sur[2] = IMG_Load("soldier3.png");
+    sol_sur[3] = IMG_Load("soldier4.png");
+    sol_sur[4] = IMG_Load("soldier5.png");
+    sol_sur[5] = IMG_Load("soldier6.png");
+    sol_sur[6] = IMG_Load("soldier7.png");
+    sol_sur[7] = IMG_Load("soldier8.png");
+    sol_sur[8] = IMG_Load("soldier9.png");
+    sol_sur[9] = IMG_Load("soldier10.png");
     int map[1500][800]={};
     srand(time(NULL));
     direction directions[6];
@@ -242,28 +267,32 @@ int Run(int reg_count , int player_count)
                                              SCREEN_HEIGHT, SDL_WINDOW_OPENGL);
     SDL_Renderer *sdlRenderer = SDL_CreateRenderer(sdlWindow, -1, SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_ACCELERATED);
     SDL_RendererFlip flip = SDL_FLIP_HORIZONTAL;
-    //Mix_PlayMusic(start,-1);
     SDL_Surface * bg_surface = IMG_Load("sea2.jpg");
     TTF_Font * font = TTF_OpenFont("fonts/arial.ttf" , 100);
     SDL_Surface *surface_tower = IMG_Load("tower.png");
     SDL_Surface *surface_barracks = IMG_Load("barracks.png");
     SDL_Surface *arrow_sur = IMG_Load("arrow.png");
-    SDL_Surface *sol_sur = IMG_Load("soldier.png");
     while(shallExit == SDL_FALSE) {
         attack( army,regions );
         SDL_RenderClear(sdlRenderer);
         background(bg_surface , sdlRenderer);
         draw_shapes(regions , sdlRenderer);
-        draw_soldiers_and_attack(sdlRenderer ,regions ,sol_sur , army , flip);
-        nums(font , regions , sdlRenderer);
         draw_barracks(sdlRenderer,regions,surface_tower,surface_barracks);
+        draw_soldiers_and_attack(sdlRenderer ,regions ,sol_sur , army , flip , colors);
+        nums(font , regions , sdlRenderer);
         draw_arrow(sdlRenderer , regions , arrow_sur);
         SDL_RenderPresent(sdlRenderer);
         SDL_Event sdlEvent;
-        SDL_Delay(1000/FPS);
-        for(int i=0 ; regions[i].c_y !=0 ; i++){
-            if(regions[i].soldiers < 50.3 && regions[i].color !=0xffccffff && regions[i].color !=0xaac0c0c0)
-                regions[i].soldiers+=1;}
+        //SDL_Delay(1000/FPS);
+        for(int i=0 ; regions[i].c_y !=0 ; i++) {
+            if (regions[i].soldiers < 51 && regions[i].color != 0xffccffff && regions[i].color != 0xaac0c0c0) {
+                if (counter == 10) {
+                    regions[i].soldiers += 1;
+                }
+            }
+        }
+            if (counter == 10)counter=0;
+            counter ++;
         while (SDL_PollEvent(&sdlEvent)) {
             switch (sdlEvent.type) {
                 case SDL_QUIT:
@@ -289,7 +318,8 @@ int Run(int reg_count , int player_count)
                 case SDL_MOUSEBUTTONUP:
                     for(int i=0 ;i <= reg_head ; i++) {
                         if (pow(sdlEvent.motion.x - regions[i].c_x, 2) + pow(sdlEvent.motion.y - regions[i].c_y, 2) <
-                            pow(regions[i].r_cpy - 30, 2)  && regions[i].color != 0xffc0c0c0 && selected != -1 && regions[selected].color != regions[i].color) {
+                            pow(regions[i].r_cpy - 30, 2)  && regions[i].color != 0xffc0c0c0 && selected != -1 && regions[i].existence==1) {
+                            if(selected != i)
                             regions[selected].attack = i;
                         }
                     }
