@@ -1,37 +1,16 @@
 //
 // Created by nima on 30.01.22.
 //
-#include <stdio.h>
-#include <stdbool.h>
-#include <SDL2/SDL.h>
-#include <SDL2/SDL2_gfxPrimitives.h>
-#include <time.h>
-#include <SDL2/SDL_mixer.h>
-#include <SDL2/SDL_ttf.h>
-#include <SDL2/SDL_image.h>
-#include "main.h"
 
-int Run_menu(){
-    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) < 0) {
-        printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
-        return 0;
-    }
-    Mix_OpenAudio(44100,MIX_DEFAULT_FORMAT,2,2048);
-    Mix_Music *start = Mix_LoadMUS("legends.mp3");
-    TTF_Init();
-    SDL_Window *sdlWindow = SDL_CreateWindow("Test_Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH,
-                                             SCREEN_HEIGHT, SDL_WINDOW_OPENGL);
-    SDL_Renderer *sdlRenderer = SDL_CreateRenderer(sdlWindow, -1, SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_ACCELERATED);
-    Mix_PlayMusic(start,-1);
-    char name [25];
-    for(int i=0 ;i<25 ; i++)name[i]= 0;
+#include "all.h"
+
+int Run_menu(SDL_Window *sdlWindow , SDL_Renderer *sdlRenderer , TTF_Font * font){
+    SDL_bool shallExit = SDL_FALSE;
+    char name [25] = {0};
     int name_head =0;
-    //int capslock;
-    int length=40;
     SDL_Surface * bg_surface = IMG_Load("menu_bg.jpg");
     SDL_Texture* background = SDL_CreateTextureFromSurface(sdlRenderer, bg_surface);
     SDL_Rect rect = {0 , 0 , 1500 , 800};
-    TTF_Font * font = TTF_OpenFont("fonts/Awake-the-Beauty.ttf" , 500);
     SDL_Rect state = {400 , 30, 500, 200};
     SDL_Color state_color = {0, 0, 0, 5};
     SDL_Surface *state_sur;
@@ -59,7 +38,7 @@ int Run_menu(){
         SDL_RenderCopy(sdlRenderer , background , NULL , &rect);
         SDL_RenderCopy(sdlRenderer, state_tx, NULL, &state);
         SDL_RenderPresent(sdlRenderer);
-        state_color.a += 2;
+        state_color.a += 6;
         SDL_FreeSurface(state_sur);
         SDL_DestroyTexture(state_tx);
         SDL_Delay(1000 / FPS);
@@ -74,7 +53,7 @@ int Run_menu(){
         SDL_RenderCopy(sdlRenderer, state_tx, NULL, &state);
         SDL_RenderCopy(sdlRenderer, en_tx, NULL, &en);
         SDL_RenderPresent(sdlRenderer);
-        en_color.a += 2;
+        en_color.a += 6;
         SDL_FreeSurface(en_sur);
         SDL_DestroyTexture(en_tx);
         SDL_Delay(1000 / FPS);
@@ -129,8 +108,8 @@ int Run_menu(){
         SDL_RenderCopy(sdlRenderer, state_tx, NULL, &state);
         SDL_RenderCopy(sdlRenderer, en_tx, NULL, &en);
         SDL_RenderPresent(sdlRenderer);
-        en_color.a -= 2;
-        name_color.a -= 2;
+        en_color.a -= 6;
+        name_color.a -= 6;
         SDL_FreeSurface(en_sur);
         SDL_DestroyTexture(en_tx);
         SDL_FreeSurface(name_sur);
@@ -152,8 +131,8 @@ int Run_menu(){
         SDL_FreeSurface(dm_sur);
         SDL_DestroyTexture(gar_tx);
         SDL_DestroyTexture(dm_tx);
-        gar_color.a += 2;
-        dm_color.a += 2;
+        gar_color.a += 6;
+        dm_color.a += 6;
         SDL_Delay(1000 / FPS);
     }
     gar_sur = TTF_RenderText_Solid(font, "Generate a random map", gar_color);
@@ -171,21 +150,15 @@ int Run_menu(){
         while (SDL_PollEvent(&sdlEvent)) {
             switch (sdlEvent.type) {
                 case SDL_QUIT:
-                    Mix_FreeMusic(start);
                     shallExit = SDL_TRUE;
                     break;
                 case SDL_MOUSEBUTTONDOWN:
                     if(sdlEvent.motion.x > 1000 && sdlEvent.motion.x < 1450 && sdlEvent.motion.y > 30 && sdlEvent.motion.y < 100){
-                        Mix_FreeMusic(start);
                         SDL_FreeSurface(gar_sur);
                         SDL_FreeSurface(dm_sur);
                         SDL_DestroyTexture(gar_tx);
                         SDL_DestroyTexture(dm_tx);
-                        SDL_DestroyWindow(sdlWindow);
-                        TTF_Quit();
-                        SDL_Quit();
-                        return 1;
-                    }
+                        return 5;}
                     break;
                 case SDL_MOUSEMOTION:
                     if(sdlEvent.motion.x > 1000 && sdlEvent.motion.x < 1450 && sdlEvent.motion.y > 30 && sdlEvent.motion.y < 100){

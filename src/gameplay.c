@@ -1,17 +1,11 @@
 //
 // Created by nima on 30.01.22.
 //
-
-#include <stdio.h>
-#include <stdbool.h>
-#include <SDL2/SDL.h>
-#include <SDL2/SDL2_gfxPrimitives.h>
-#include <time.h>
-#include <SDL2/SDL_ttf.h>
-#include <SDL2/SDL_image.h>
-#include "main.h"
-#include <math.h>
-#include <SDL2/SDL_mixer.h>
+#include"all.h"
+#include "structs_and_functions.h"
+int reg_head = 0;
+int army_head = 0;
+int selected = -1;
 
 void background(SDL_Surface * bg_surface , SDL_Renderer *sdlRenderer){
     for(int i = 0 ; i<1500 ; i+=200){
@@ -120,14 +114,6 @@ void draw_shapes(region regions[50] , SDL_Renderer *sdlRenderer){
     }
 }
 
-int num_digit(int num){
-    int count = 0;
-    while(num != 0) {
-        num /= 10;
-        count++;
-    }
-    return count;
-}
 void nums(TTF_Font * font , region regions[50] , SDL_Renderer *sdlRenderer) {
     int i = 0;
     while (regions[i].c_y != 0) {
@@ -230,11 +216,9 @@ void draw_soldiers_and_attack(SDL_Renderer *sdlRenderer ,region regions[50] , SD
     }
 }
 
-int Run(int reg_count , int player_count)
+int Run(int reg_count , int player_count , SDL_Window *sdlWindow , SDL_Renderer *sdlRenderer)
 {
-    Mix_OpenAudio(44100,MIX_DEFAULT_FORMAT,2,2048);
-    Mix_Music *mio = Mix_LoadMUS("music2.mp3");
-    Mix_PlayMusic(mio,-1);
+    SDL_bool shallExit = SDL_FALSE;
     Uint32 colors [10];
     region regions[50];
     region regions_fill[50];
@@ -258,14 +242,6 @@ int Run(int reg_count , int player_count)
     colors_init(colors);
     make_map(map , regions , regions_fill , directions , 0 );
     give_colors(regions , reg_count ,player_count , colors);
-    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) < 0) {
-        printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
-        return 0;
-    }
-    TTF_Init();
-    SDL_Window *sdlWindow = SDL_CreateWindow("Test_Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH,
-                                             SCREEN_HEIGHT, SDL_WINDOW_OPENGL);
-    SDL_Renderer *sdlRenderer = SDL_CreateRenderer(sdlWindow, -1, SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_ACCELERATED);
     SDL_RendererFlip flip = SDL_FLIP_HORIZONTAL;
     SDL_Surface * bg_surface = IMG_Load("sea2.jpg");
     TTF_Font * font = TTF_OpenFont("fonts/arial.ttf" , 100);

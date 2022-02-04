@@ -123,6 +123,60 @@ state/fast:
 	$(MAKE) -f CMakeFiles/state.dir/build.make CMakeFiles/state.dir/build
 .PHONY : state/fast
 
+src/gameplay.o: src/gameplay.c.o
+
+.PHONY : src/gameplay.o
+
+# target to build an object file
+src/gameplay.c.o:
+	$(MAKE) -f CMakeFiles/state.dir/build.make CMakeFiles/state.dir/src/gameplay.c.o
+.PHONY : src/gameplay.c.o
+
+src/gameplay.i: src/gameplay.c.i
+
+.PHONY : src/gameplay.i
+
+# target to preprocess a source file
+src/gameplay.c.i:
+	$(MAKE) -f CMakeFiles/state.dir/build.make CMakeFiles/state.dir/src/gameplay.c.i
+.PHONY : src/gameplay.c.i
+
+src/gameplay.s: src/gameplay.c.s
+
+.PHONY : src/gameplay.s
+
+# target to generate assembly for a file
+src/gameplay.c.s:
+	$(MAKE) -f CMakeFiles/state.dir/build.make CMakeFiles/state.dir/src/gameplay.c.s
+.PHONY : src/gameplay.c.s
+
+src/get_config.o: src/get_config.c.o
+
+.PHONY : src/get_config.o
+
+# target to build an object file
+src/get_config.c.o:
+	$(MAKE) -f CMakeFiles/state.dir/build.make CMakeFiles/state.dir/src/get_config.c.o
+.PHONY : src/get_config.c.o
+
+src/get_config.i: src/get_config.c.i
+
+.PHONY : src/get_config.i
+
+# target to preprocess a source file
+src/get_config.c.i:
+	$(MAKE) -f CMakeFiles/state.dir/build.make CMakeFiles/state.dir/src/get_config.c.i
+.PHONY : src/get_config.c.i
+
+src/get_config.s: src/get_config.c.s
+
+.PHONY : src/get_config.s
+
+# target to generate assembly for a file
+src/get_config.c.s:
+	$(MAKE) -f CMakeFiles/state.dir/build.make CMakeFiles/state.dir/src/get_config.c.s
+.PHONY : src/get_config.c.s
+
 src/main.o: src/main.c.o
 
 .PHONY : src/main.o
@@ -150,6 +204,33 @@ src/main.c.s:
 	$(MAKE) -f CMakeFiles/state.dir/build.make CMakeFiles/state.dir/src/main.c.s
 .PHONY : src/main.c.s
 
+src/menu.o: src/menu.c.o
+
+.PHONY : src/menu.o
+
+# target to build an object file
+src/menu.c.o:
+	$(MAKE) -f CMakeFiles/state.dir/build.make CMakeFiles/state.dir/src/menu.c.o
+.PHONY : src/menu.c.o
+
+src/menu.i: src/menu.c.i
+
+.PHONY : src/menu.i
+
+# target to preprocess a source file
+src/menu.c.i:
+	$(MAKE) -f CMakeFiles/state.dir/build.make CMakeFiles/state.dir/src/menu.c.i
+.PHONY : src/menu.c.i
+
+src/menu.s: src/menu.c.s
+
+.PHONY : src/menu.s
+
+# target to generate assembly for a file
+src/menu.c.s:
+	$(MAKE) -f CMakeFiles/state.dir/build.make CMakeFiles/state.dir/src/menu.c.s
+.PHONY : src/menu.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -159,9 +240,18 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... state"
+	@echo "... src/gameplay.o"
+	@echo "... src/gameplay.i"
+	@echo "... src/gameplay.s"
+	@echo "... src/get_config.o"
+	@echo "... src/get_config.i"
+	@echo "... src/get_config.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/menu.o"
+	@echo "... src/menu.i"
+	@echo "... src/menu.s"
 .PHONY : help
 
 
