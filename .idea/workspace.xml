@@ -13,27 +13,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4995a77a-152a-4383-b759-d72b6877e8cf" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/structs_and_functions.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/Makefile2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/progress.marks" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/progress.marks" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/state.dir/C.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/state.dir/C.includecache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/state.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/state.dir/DependInfo.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/state.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/state.dir/build.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/state.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/state.dir/cmake_clean.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/state.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/state.dir/depend.internal" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/state.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/state.dir/depend.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/state.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/state.dir/link.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/state.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/state.dir/progress.make" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/state.dir/src/gameplay.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/state.dir/src/gameplay.c.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/state.dir/src/get_config.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/state.dir/src/get_config.c.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/state.dir/src/main.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/state.dir/src/main.c.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/state.dir/src/menu.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/state.dir/src/menu.c.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/barracks2.png" beforeDir="false" afterPath="$PROJECT_DIR$/barracks2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/soldier10.png" beforeDir="false" afterPath="$PROJECT_DIR$/soldier10.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/soldier2.png" beforeDir="false" afterPath="$PROJECT_DIR$/soldier2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/soldier3.png" beforeDir="false" afterPath="$PROJECT_DIR$/soldier3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/soldier4.png" beforeDir="false" afterPath="$PROJECT_DIR$/soldier4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/soldier5.png" beforeDir="false" afterPath="$PROJECT_DIR$/soldier5.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/soldier6.png" beforeDir="false" afterPath="$PROJECT_DIR$/soldier6.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/soldier7.png" beforeDir="false" afterPath="$PROJECT_DIR$/soldier7.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/soldier8.png" beforeDir="false" afterPath="$PROJECT_DIR$/soldier8.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/soldier9.png" beforeDir="false" afterPath="$PROJECT_DIR$/soldier9.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gameplay.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameplay.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/get_config.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/get_config.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.h" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/menu.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/menu.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/structs_and_functions.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/structs_and_functions.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/state" beforeDir="false" afterPath="$PROJECT_DIR$/state" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -46,6 +46,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -138,7 +146,27 @@
       <workItem from="1643975336803" duration="2678000" />
       <workItem from="1643979058623" duration="8974000" />
       <workItem from="1643988469964" duration="1555000" />
-      <workItem from="1643991117419" duration="18000" />
+      <workItem from="1643991117419" duration="3000000" />
+      <workItem from="1643994416547" duration="1740000" />
+      <workItem from="1643997271849" duration="2258000" />
+      <workItem from="1644000200922" duration="12464000" />
+      <workItem from="1644014099052" duration="2068000" />
+      <workItem from="1644053439337" duration="2518000" />
+      <workItem from="1644057938796" duration="1122000" />
+      <workItem from="1644059638164" duration="14246000" />
+      <workItem from="1644079664214" duration="1364000" />
+      <workItem from="1644082311662" duration="13107000" />
+      <workItem from="1644097015750" duration="1000" />
+      <workItem from="1644097235598" duration="962000" />
+      <workItem from="1644099365536" duration="3599000" />
+      <workItem from="1644103262004" duration="3262000" />
+      <workItem from="1644135666709" duration="1790000" />
+      <workItem from="1644137642454" duration="800000" />
+      <workItem from="1644139320599" duration="4680000" />
+      <workItem from="1644144669129" duration="3265000" />
+      <workItem from="1644148044937" duration="1989000" />
+      <workItem from="1644150503634" duration="369000" />
+      <workItem from="1644151057170" duration="2062000" />
     </task>
     <servers />
   </component>

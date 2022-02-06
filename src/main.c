@@ -16,10 +16,18 @@ int main(){
     SDL_Renderer *sdlRenderer = SDL_CreateRenderer(sdlWindow, -1, SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_ACCELERATED);
     int random_config [2]= {0 , 0};
     Mix_OpenAudio(44100,MIX_DEFAULT_FORMAT,2,2048);
-    Mix_Music *start = Mix_LoadMUS("legends.mp3");
+    Mix_Music *start = Mix_LoadMUS("menu.mp3");
     Mix_PlayMusic(start,-1);
-    if(Run_menu(sdlWindow , sdlRenderer , font) == 5)
-        if(p_r(random_config,sdlWindow , sdlRenderer, font) == 1);
-            Run(random_config[0] - 1,random_config[1],sdlWindow ,sdlRenderer);
+    if(Run_menu(sdlWindow , sdlRenderer , font) == 5){
+        if(p_r(random_config,sdlWindow , sdlRenderer, font) == 1) {
+           Mix_FreeMusic(start);
+            start = Mix_LoadMUS("gameplay.mp3");
+            Mix_PlayMusic(start,-1);
+            Run(random_config[0] , random_config[1] , sdlWindow, sdlRenderer);
+        }
+    }
+    SDL_DestroyWindow(sdlWindow);
+    TTF_Quit();
+    SDL_Quit();
     return 0;
 }

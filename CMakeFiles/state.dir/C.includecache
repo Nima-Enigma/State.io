@@ -22,13 +22,13 @@ SDL2/SDL_ttf.h
 SDL2/SDL_image.h
 -
 
-/home/nima/Desktop/state.io/src/main.c
+/home/nima/Desktop/state.io/src/gameplay.c
 all.h
 /home/nima/Desktop/state.io/src/all.h
 structs_and_functions.h
 /home/nima/Desktop/state.io/src/structs_and_functions.h
-SDL2/SDL_mixer.h
-/home/nima/Desktop/state.io/src/SDL2/SDL_mixer.h
 
 /home/nima/Desktop/state.io/src/structs_and_functions.h
+sys/time.h
+-
 

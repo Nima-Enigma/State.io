@@ -102,5 +102,5 @@ int p_r(int random_config[2] , SDL_Window *sdlWindow , SDL_Renderer *sdlRenderer
                     break;
             }
         }
-    }
+    }return 0;
 }

@@ -4,8 +4,10 @@
 #ifndef STATE_IO_MAIN_H
 #define STATE_IO_MAIN_H
 
+#include <sys/time.h>
+
 typedef struct region{
-    int existence;
+    char existence;
     int soldiers;
     Uint32 color;
     Sint16 c_x;
@@ -21,10 +23,12 @@ typedef struct soldier{
     float v_x;
     float v_y;
     int target;
-    int existence;
+    int team;
+    char existence;
     Uint32 color;
     int dest_x;
     int dest_y;
+    double delay;
 }soldier;
 
 typedef struct direction{
@@ -32,20 +36,37 @@ typedef struct direction{
     int y;
 }direction;
 
+typedef struct spell{
+    int existance;
+    int x;
+    int y;
+    int type;
+    int cast_time;
+    Uint32 color;
+}spell;
+
+typedef struct on_spells{
+    int cast_time;
+    int type;
+}on_spells;
+
+void call_AI(region regions[50]);
 int p_r(int random_config[2] , SDL_Window *sdlWindow , SDL_Renderer *sdlRenderer , TTF_Font * font);
 int Run_menu(SDL_Window *sdlWindow , SDL_Renderer *sdlRenderer , TTF_Font * font);
-void background(SDL_Surface * bg_surface , SDL_Renderer *sdlRenderer);
-void initialize(region regions[50], direction directions[6] , region regions_fill[50] , int map [1500][800]);
+void background(SDL_Texture * background , SDL_Renderer *sdlRenderer);
+void initialize(region regions[50], direction directions[6] , region regions_fill[50] ,int map [1500][800]);
 int check_availability(int map[1500][800],region regions[50], direction next , int i);
 void colors_init(Uint32 colors[10]);
 void give_colors(region regions [50] ,int reg_count ,int player_count , Uint32 colors[10]);
 void make_map(int map [1500][800] ,region regions[50] , region regions_fill[50], direction directions[6],int head );
 void draw_shapes(region regions[50] , SDL_Renderer *sdlRenderer);
 void nums(TTF_Font * font , region regions[50] , SDL_Renderer *sdlRenderer);
-void draw_barracks(SDL_Renderer * sdlRenderer,region regions[50], SDL_Surface *surface_tower , SDL_Surface *surface_barracks );
+void create_sol_tex(SDL_Renderer *sdlRenderer , SDL_Surface * sol_sur[10],SDL_Texture * sol_tex[10]);
+void draw_barracks(SDL_Renderer * sdlRenderer,region regions[50], SDL_Texture *barracks, SDL_Texture *towers, SDL_Texture *ruins_tex ,Uint32 colors[10] ,int player_count , SDL_RendererFlip flip);
 void draw_arrow(SDL_Renderer *sdlRenderer , region regions [50] , SDL_Surface * arrow_sur);
-void attack(soldier army [300]  ,region regions[50] );
-void draw_soldiers_and_attack(SDL_Renderer *sdlRenderer ,region regions[50] , SDL_Surface * sol_sur[10] ,soldier army[300] ,SDL_RendererFlip flip , Uint32 colors[10]);
+void attack(soldier army [500]  ,region regions[50] , Uint32 colors[10], int player_count);
+int ready(soldier guy);
+void draw_soldiers_and_attack(SDL_Renderer *sdlRenderer ,region regions[50] , SDL_Texture * sol_tex[10] ,soldier army[500] ,SDL_RendererFlip flip , Uint32 colors[10] , int player_count);
 int Run(int reg_count , int player_count , SDL_Window *sdlWindow , SDL_Renderer *sdlRenderer);
 
 #endif //STATE_IO_MAIN_H

@@ -10,6 +10,7 @@ int Run_menu(SDL_Window *sdlWindow , SDL_Renderer *sdlRenderer , TTF_Font * font
     int name_head =0;
     SDL_Surface * bg_surface = IMG_Load("menu_bg.jpg");
     SDL_Texture* background = SDL_CreateTextureFromSurface(sdlRenderer, bg_surface);
+    SDL_FreeSurface(bg_surface);
     SDL_Rect rect = {0 , 0 , 1500 , 800};
     SDL_Rect state = {400 , 30, 500, 200};
     SDL_Color state_color = {0, 0, 0, 5};
@@ -45,6 +46,7 @@ int Run_menu(SDL_Window *sdlWindow , SDL_Renderer *sdlRenderer , TTF_Font * font
     }
     state_sur = TTF_RenderText_Solid(font, "State.io", state_color);
     state_tx = SDL_CreateTextureFromSurface(sdlRenderer, state_sur);
+    SDL_FreeSurface(state_sur);
     while(en_color.a < 250){
         en_sur = TTF_RenderText_Solid(font, "Enter your name :", en_color);
         en_tx = SDL_CreateTextureFromSurface(sdlRenderer, en_sur);
@@ -60,6 +62,7 @@ int Run_menu(SDL_Window *sdlWindow , SDL_Renderer *sdlRenderer , TTF_Font * font
     }
     en_sur = TTF_RenderText_Solid(font, "Enter your name :", en_color);
     en_tx = SDL_CreateTextureFromSurface(sdlRenderer, en_sur);
+    SDL_FreeSurface(en_sur);
     int flag = 1;
     while(flag && !shallExit) {
         name_sur = TTF_RenderText_Solid(font, name, name_color);
@@ -139,6 +142,8 @@ int Run_menu(SDL_Window *sdlWindow , SDL_Renderer *sdlRenderer , TTF_Font * font
     gar_tx = SDL_CreateTextureFromSurface(sdlRenderer, gar_sur);
     dm_sur = TTF_RenderText_Solid(font, "Default maps", dm_color);
     dm_tx = SDL_CreateTextureFromSurface(sdlRenderer, dm_sur);
+    SDL_FreeSurface(gar_sur);
+    SDL_FreeSurface(dm_sur);
     while(shallExit == SDL_FALSE) {
         SDL_RenderClear(sdlRenderer);
         SDL_RenderCopy(sdlRenderer , background , NULL , &rect);
@@ -154,8 +159,8 @@ int Run_menu(SDL_Window *sdlWindow , SDL_Renderer *sdlRenderer , TTF_Font * font
                     break;
                 case SDL_MOUSEBUTTONDOWN:
                     if(sdlEvent.motion.x > 1000 && sdlEvent.motion.x < 1450 && sdlEvent.motion.y > 30 && sdlEvent.motion.y < 100){
-                        SDL_FreeSurface(gar_sur);
-                        SDL_FreeSurface(dm_sur);
+                        SDL_DestroyTexture(background);
+                        SDL_DestroyTexture(state_tx);
                         SDL_DestroyTexture(gar_tx);
                         SDL_DestroyTexture(dm_tx);
                         return 5;}
