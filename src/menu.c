@@ -4,7 +4,7 @@
 
 #include "all.h"
 
-int Run_menu(SDL_Window *sdlWindow , SDL_Renderer *sdlRenderer , TTF_Font * font){
+int Run_menu( SDL_Renderer *sdlRenderer , TTF_Font * font){
     SDL_bool shallExit = SDL_FALSE;
     char name [25] = {0};
     int name_head =0;
@@ -151,6 +151,7 @@ int Run_menu(SDL_Window *sdlWindow , SDL_Renderer *sdlRenderer , TTF_Font * font
         SDL_RenderCopy(sdlRenderer, gar_tx, NULL, &gar);
         SDL_RenderCopy(sdlRenderer, dm_tx, NULL, &dm);
         SDL_RenderPresent(sdlRenderer);
+        SDL_Delay(1000/FPS);
         SDL_Event sdlEvent;
         while (SDL_PollEvent(&sdlEvent)) {
             switch (sdlEvent.type) {
@@ -164,37 +165,41 @@ int Run_menu(SDL_Window *sdlWindow , SDL_Renderer *sdlRenderer , TTF_Font * font
                         SDL_DestroyTexture(gar_tx);
                         SDL_DestroyTexture(dm_tx);
                         return 5;}
+                    else if(sdlEvent.motion.x > 1090 && sdlEvent.motion.x < 1390 && sdlEvent.motion.y > 150 && sdlEvent.motion.y < 220){
+                        SDL_DestroyTexture(background);
+                        SDL_DestroyTexture(state_tx);
+                        SDL_DestroyTexture(gar_tx);
+                        SDL_DestroyTexture(dm_tx);
+                        return 1;
+                    }
                     break;
                 case SDL_MOUSEMOTION:
                     if(sdlEvent.motion.x > 1000 && sdlEvent.motion.x < 1450 && sdlEvent.motion.y > 30 && sdlEvent.motion.y < 100){
                         gar.w =500;
                         gar.h =80;
                         gar.x = 980;
-//                        gar_color.r = 255,gar_color.g =  255,gar_color.b =  255;
                     }
                     else{
                         gar.w =450;
                         gar.h =70;
                         gar.x = 1000;
-                        //gar_color.r = 0,gar_color.g =  0,gar_color.b =  0;
                     }
                     if(sdlEvent.motion.x > 1090 && sdlEvent.motion.x < 1390 && sdlEvent.motion.y > 150 && sdlEvent.motion.y < 220){
                         dm.w =340;
                         dm.h =85;
                         dm.x = 1070;
-                        //dm_color.r = 255,dm_color.g =  255,dm_color.b =  255;
                     }
                     else{
                         dm.w = 300;
                         dm.h = 70 ;
                         dm.x = 1090;
-                        //dm_color.r = 0,dm_color.g =  0,dm_color.b =  0;
                     }
             }
         }
     }
-    SDL_DestroyWindow(sdlWindow);
-    TTF_Quit();
-    SDL_Quit();
+    SDL_DestroyTexture(background);
+    SDL_DestroyTexture(state_tx);
+    SDL_DestroyTexture(gar_tx);
+    SDL_DestroyTexture(dm_tx);
     return 0;
 }

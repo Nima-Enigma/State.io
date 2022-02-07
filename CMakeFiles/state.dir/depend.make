@@ -10,6 +10,7 @@ CMakeFiles/state.dir/src/get_config.c.o: src/get_config.c
 
 CMakeFiles/state.dir/src/main.c.o: src/all.h
 CMakeFiles/state.dir/src/main.c.o: src/main.c
+CMakeFiles/state.dir/src/main.c.o: src/menu.h
 CMakeFiles/state.dir/src/main.c.o: src/structs_and_functions.h
 
 CMakeFiles/state.dir/src/menu.c.o: src/all.h

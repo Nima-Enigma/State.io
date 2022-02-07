@@ -88,7 +88,7 @@ void make_map(int map [1500][800] ,region regions[50] , region regions_fill[50],
             regions[reg_head + 1].color = 0xff8cB4d2;
             regions[reg_head + 1].existence = 1;
             regions[reg_head + 1].attack = -1 ;
-            regions[reg_head + 1].soldiers = 10;
+            regions[reg_head + 1].soldiers = 20;
                 if (rand() % 2 == 0)regions[reg_head + 1].r = 110;
                 else regions[reg_head + 1].r = 90;
             regions[reg_head + 1].r_cpy = regions[reg_head + 1].r;
@@ -253,8 +253,9 @@ void draw_soldiers_and_attack(SDL_Renderer *sdlRenderer ,region regions[50] , SD
             for (int j = i + 1; j < 500; j++) {
                 if (army[i].color != army[j].color && army[i].x - army[j].x > -10 && army[i].x - army[j].x < 10 &&
                     army[i].y - army[j].y > -10 && army[i].y - army[j].y < 10 && army[j].existence != 0) {
+                    int temp = army[i].existence;
                     army[i].existence -= army[j].existence;
-                    army[j].existence -= army[i].existence;
+                    army[j].existence -= temp;
                     if(army[j].existence == -1)army[j].existence = 0;
                     if(army[i].existence == -1)army[i].existence = 0;
                     break;
@@ -295,8 +296,8 @@ void draw_soldiers_and_attack(SDL_Renderer *sdlRenderer ,region regions[50] , SD
 }
 
 void call_AI(region regions[50]) {
-    int distance = 1000000000;
     for (int j = 0; j <= reg_head; j++) {
+        int distance = 1000000000;
         if (regions[j].existence == 1 && regions[j].color != 0xff0000cc && regions[j].color != 0xff8cB4d2 && regions[j].color != 0xffc0c0c0) {
             for (int i = 0; i <= reg_head; i++) {
                   if (regions[i].existence == 1 && regions[i].color != 0xffc0c0c0 && i!=j) {
@@ -322,13 +323,13 @@ void drop_spell(region regions[50] , Uint32 color , spell spells[15]){
     if(spell_head == 14)spell_head = 0 ;
     if(regions[a].c_x > regions[b].c_x)
     spells[spell_head].x =rand() % (regions[a].c_x - regions[b].c_x) + regions[b].c_x;
-    else if(regions[a].c_x < regions[b].c_x) spells[spell_head].x =rand() % (regions[b].c_x - regions[a].c_x) + regions[a].c_x;
+    else if(regions[a].c_x < regions[b].c_x) spells[spell_head].x = rand() % (regions[b].c_x - regions[a].c_x) + regions[a].c_x;
     else spells[spell_head].x = regions[a].c_x ;
     if(regions[a].c_y > regions[b].c_y)
         spells[spell_head].y =rand() % (regions[a].c_y - regions[b].c_y) + regions[b].c_y;
     else if(regions[a].c_y < regions[b].c_y)spells[spell_head].y =rand() % (regions[b].c_y - regions[a].c_y) + regions[a].c_y;
     else spells[spell_head].y = regions[a].c_y;
-    spells[spell_head].type = rand() % 1 +1;
+    spells[spell_head].type = rand() % 4;
     spells[spell_head].color = color ;
     spells[spell_head].existance =1 ;
     struct timeval s_t;
@@ -341,9 +342,9 @@ void draw_spell(spell spells[15] , SDL_Renderer * sdlRenderer , SDL_Texture * sp
     struct timeval now;
     gettimeofday(&now , NULL);
     for(int i=0 ; i<15 ; i++){
-        if(spells[i].existance ==1 && now.tv_sec - spells[i].cast_time < 6) {
+        if(spells[i].existance ==1 && now.tv_sec - spells[i].cast_time < 5) {
             aaellipseColor(sdlRenderer, spells[i].x + 2, spells[i].y + 2, 80, 65, 0xff000000);
-            filledEllipseColor(sdlRenderer, spells[i].x + 2, spells[i].y + 2, 80, 65, spells[i].color - 0x88000000);
+            filledEllipseColor(sdlRenderer, spells[i].x + 2, spells[i].y + 2, 80, 65, spells[i].color - 0xaa000000);
             SDL_Rect rect = {spells[i].x -30, spells[i].y -20, 60 , 40};
             SDL_RenderCopy(sdlRenderer , spell_tex[spells[i].type] , NULL , &rect);
         }
@@ -361,6 +362,7 @@ void spells_active(soldier army[500],spell spells[15] ,int player_count , int co
                 struct timeval cast;
                 gettimeofday(&cast,NULL);
                 on_spell[army[i].team].cast_time = cast.tv_sec;
+                if(on_spell[army[i].team].type == 1)on_spell[army[i].team].cast_time -= 2;
             }
         }
     }
@@ -401,22 +403,35 @@ void normalize(soldier army[500] , int player_count) {
     struct timeval now;
     gettimeofday(&now, NULL);
     for (int i = 0; i < player_count; i++) {
+        if(on_spell[i].type != -1){
+            if (now.tv_sec - on_spell[i].cast_time > 4)
+                on_spell[i].type = -1;
+        }
         if (on_spell[i].type == -1){
             for (int j = 0; j < 500; j++) {
                 if (army[j].team == i) {
                     if(army[j].existence == 2)army[j].existence -- ;
                 }
+                if (army[j].team == i){
+                    if(pow(army[j].v_y,2) + pow (army[j].v_x , 2) > 25){
+                        army[j].v_x /=2;
+                        army[j].v_y /=2;
+                    }
+                }
             }
-        }
-        else {
-            if (now.tv_sec - on_spell[i].cast_time > 4)
-                on_spell[i].type = -1;
         }
     }
 }
 
-int Run(int reg_count , int player_count , SDL_Window *sdlWindow , SDL_Renderer *sdlRenderer)
+int Run(int reg_count , int player_count , SDL_Renderer *sdlRenderer , int random_or_not)
 {
+    if(random_or_not != 5){
+        srand(random_or_not);
+        player_count = rand()%10 + 1;
+        reg_count = rand()%10 + 10;
+    }
+    else if(random_or_not == 5)
+        srand(time(NULL));
     spell spells[15];
     for(int i=0 ; i<15 ; i++)spells[i].existance =0;
     for(int i=0 ; i<10 ; i++)on_spell[i].type = -1;
@@ -433,12 +448,12 @@ int Run(int reg_count , int player_count , SDL_Window *sdlWindow , SDL_Renderer 
     create_sol_tex(sdlRenderer ,sol_sur,sol_tex);
     create_spells_tex(sdlRenderer ,spell_sur,spell_tex);
     int map[1500][800]={};
-    srand(time(NULL));
     direction directions[6];
     initialize(regions , directions , regions_fill , map);
     colors_init(colors);
     make_map(map , regions , regions_fill , directions , 0 );
     give_colors(regions , reg_count ,player_count , colors);
+    srand(time(NULL));
     SDL_RendererFlip flip = SDL_FLIP_HORIZONTAL;
     SDL_Surface * bg_surface = IMG_Load("grass.png");
     SDL_Texture* backg = SDL_CreateTextureFromSurface(sdlRenderer, bg_surface);
@@ -452,7 +467,7 @@ int Run(int reg_count , int player_count , SDL_Window *sdlWindow , SDL_Renderer 
     SDL_Texture *towers = SDL_CreateTextureFromSurface(sdlRenderer, surface_tower);
     while(shallExit == SDL_FALSE) {
         for(int i=0 ; i<player_count ; i++){
-            if(rand()%100 == 5)drop_spell(regions,colors[i],spells);
+            if(rand() % 300 == 5)drop_spell(regions,colors[i],spells);
         }
         normalize(army , player_count);
         call_AI(regions);

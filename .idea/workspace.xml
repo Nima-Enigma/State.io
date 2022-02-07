@@ -13,26 +13,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4995a77a-152a-4383-b759-d72b6877e8cf" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/14.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/15.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/20.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/7.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/state.dir/C.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/state.dir/C.includecache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/state.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/state.dir/depend.internal" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/state.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/state.dir/depend.make" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/state.dir/src/gameplay.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/state.dir/src/gameplay.c.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/state.dir/src/get_config.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/state.dir/src/get_config.c.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/state.dir/src/main.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/state.dir/src/main.c.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/state.dir/src/menu.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/state.dir/src/menu.c.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/barracks2.png" beforeDir="false" afterPath="$PROJECT_DIR$/barracks2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/soldier10.png" beforeDir="false" afterPath="$PROJECT_DIR$/soldier10.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/soldier2.png" beforeDir="false" afterPath="$PROJECT_DIR$/soldier2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/soldier3.png" beforeDir="false" afterPath="$PROJECT_DIR$/soldier3.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/soldier4.png" beforeDir="false" afterPath="$PROJECT_DIR$/soldier4.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/soldier5.png" beforeDir="false" afterPath="$PROJECT_DIR$/soldier5.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/soldier6.png" beforeDir="false" afterPath="$PROJECT_DIR$/soldier6.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/soldier7.png" beforeDir="false" afterPath="$PROJECT_DIR$/soldier7.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/soldier8.png" beforeDir="false" afterPath="$PROJECT_DIR$/soldier8.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/soldier9.png" beforeDir="false" afterPath="$PROJECT_DIR$/soldier9.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gameplay.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameplay.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/get_config.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/get_config.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/get_config.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/get_config.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/menu.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/menu.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/menu.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/menu.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/structs_and_functions.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/structs_and_functions.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/state" beforeDir="false" afterPath="$PROJECT_DIR$/state" afterDir="false" />
     </list>
@@ -166,7 +164,14 @@
       <workItem from="1644144669129" duration="3265000" />
       <workItem from="1644148044937" duration="1989000" />
       <workItem from="1644150503634" duration="369000" />
-      <workItem from="1644151057170" duration="2062000" />
+      <workItem from="1644151057170" duration="2384000" />
+      <workItem from="1644159728590" duration="342000" />
+      <workItem from="1644160339974" duration="727000" />
+      <workItem from="1644163379210" duration="235000" />
+      <workItem from="1644164030660" duration="1279000" />
+      <workItem from="1644177442132" duration="614000" />
+      <workItem from="1644178297227" duration="10308000" />
+      <workItem from="1644219351142" duration="20041000" />
     </task>
     <servers />
   </component>

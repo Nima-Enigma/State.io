@@ -50,9 +50,8 @@ typedef struct on_spells{
     int type;
 }on_spells;
 
+
 void call_AI(region regions[50]);
-int p_r(int random_config[2] , SDL_Window *sdlWindow , SDL_Renderer *sdlRenderer , TTF_Font * font);
-int Run_menu(SDL_Window *sdlWindow , SDL_Renderer *sdlRenderer , TTF_Font * font);
 void background(SDL_Texture * background , SDL_Renderer *sdlRenderer);
 void initialize(region regions[50], direction directions[6] , region regions_fill[50] ,int map [1500][800]);
 int check_availability(int map[1500][800],region regions[50], direction next , int i);
@@ -67,6 +66,6 @@ void draw_arrow(SDL_Renderer *sdlRenderer , region regions [50] , SDL_Surface * 
 void attack(soldier army [500]  ,region regions[50] , Uint32 colors[10], int player_count);
 int ready(soldier guy);
 void draw_soldiers_and_attack(SDL_Renderer *sdlRenderer ,region regions[50] , SDL_Texture * sol_tex[10] ,soldier army[500] ,SDL_RendererFlip flip , Uint32 colors[10] , int player_count);
-int Run(int reg_count , int player_count , SDL_Window *sdlWindow , SDL_Renderer *sdlRenderer);
+int Run(int reg_count , int player_count, SDL_Renderer *sdlRenderer , int random_or_not);
 
 #endif //STATE_IO_MAIN_H
