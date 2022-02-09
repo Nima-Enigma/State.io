@@ -42,7 +42,7 @@ int leaderboard(SDL_bool * shallExit , SDL_Renderer * sdlRenderer , TTF_Font * f
     SDL_Texture * names_tex[7];
     SDL_Rect names_r[7];
     create_tex(names_r , names_tex , names , scores , sdlRenderer , font);
-    SDL_Surface * bg_surface = IMG_Load("leaderboard2.jpg");
+    SDL_Surface * bg_surface = IMG_Load("pics/leaderboard2.jpg");
     SDL_Texture* background = SDL_CreateTextureFromSurface(sdlRenderer, bg_surface);
     SDL_FreeSurface(bg_surface);
     SDL_Rect rect = {0 , 0 , 1500 , 800};

@@ -57,7 +57,7 @@ void background(SDL_Texture * background , SDL_Renderer *sdlRenderer);
 void initialize(region regions[50], direction directions[6] , region regions_fill[50] ,int map [1500][800]);
 int check_availability(int map[1500][800],region regions[50], direction next , int i);
 void colors_init(Uint32 colors[10]);
-void give_colors(region regions [50] ,int reg_count ,int player_count , Uint32 colors[10]);
+void give_colors(region regions [50] ,int reg_count ,int player_count , Uint32 colors[10] , int random_config);
 void make_map(int map [1500][800] ,region regions[50] , region regions_fill[50], direction directions[6],int head );
 void draw_shapes(region regions[50] , SDL_Renderer *sdlRenderer);
 void nums(TTF_Font * font , region regions[50] , SDL_Renderer *sdlRenderer);

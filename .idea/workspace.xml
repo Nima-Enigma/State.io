@@ -14,32 +14,53 @@
   <component name="ChangeListManager">
     <list default="true" id="4995a77a-152a-4383-b759-d72b6877e8cf" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/Makefile2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/progress.marks" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/progress.marks" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/14.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/15.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/20.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/A.jpeg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/state.dir/C.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/state.dir/C.includecache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/state.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/state.dir/DependInfo.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/state.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/state.dir/build.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/state.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/state.dir/cmake_clean.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/state.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/state.dir/depend.internal" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/state.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/state.dir/depend.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/state.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/state.dir/link.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/state.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/state.dir/progress.make" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/state.dir/src/gameplay.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/state.dir/src/gameplay.c.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/state.dir/src/get_config.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/state.dir/src/get_config.c.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/state.dir/src/leaderboard.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/state.dir/src/leaderboard.c.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/state.dir/src/main.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/state.dir/src/main.c.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/state.dir/src/menu.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/state.dir/src/menu.c.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/barracks2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruins.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruins2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sea2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/arrow.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/barracks.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bg2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grass.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leaderboard.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/leaderboard2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/menu_bg.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mio.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/power.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/productivity.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/reverse.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/rock.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sea.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/soldier.bmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/soldier.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/soldier1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/soldier10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/soldier2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/soldier3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/soldier4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/soldier5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/soldier6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/soldier7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/soldier8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/soldier9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/soldiert.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/speed.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gameplay.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameplay.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gameplay.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameplay.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/get_config.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/get_config.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/leaderboard.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/leaderboard.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/leaderboard.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/leaderboard.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/menu.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/menu.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/menu.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/menu.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/structs_and_functions.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameplay.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/state" beforeDir="false" afterPath="$PROJECT_DIR$/state" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tower.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -187,7 +208,8 @@
       <workItem from="1644334659159" duration="4202000" />
       <workItem from="1644338882028" duration="1750000" />
       <workItem from="1644340653699" duration="18753000" />
-      <workItem from="1644400234289" duration="1000" />
+      <workItem from="1644400234289" duration="17714000" />
+      <workItem from="1644425861928" duration="1344000" />
     </task>
     <servers />
   </component>
