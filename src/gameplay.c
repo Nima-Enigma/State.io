@@ -3,7 +3,8 @@
 //
 
 #include"all.h"
-#include "structs_and_functions.h"
+#include "gameplay.h"
+
 int reg_head = 0;
 int army_head = 0;
 int selected = -1;
@@ -61,7 +62,7 @@ void colors_init(Uint32 colors[10]){
 
 void give_colors(region regions [50] ,int reg_count ,int player_count , Uint32 colors[10]){
     for(int i=0 ; i<player_count ; i++){
-        int a = rand()%(reg_head);
+        int a = rand()%(reg_head + 1);
         if(regions[a].color == 0xff8cB4d2){
             regions[a].color = colors[i];
             regions[a].soldiers = 0;
@@ -69,7 +70,7 @@ void give_colors(region regions [50] ,int reg_count ,int player_count , Uint32 c
         else i--;
     }int copy = reg_head;
     while(copy > reg_count){
-       int a = rand() % (reg_head);
+       int a = rand() % (reg_head + 1);
        if(regions[a].color == 0xff8cB4d2 && regions[a].existence == 1){
            if(rand()%5)regions[a].existence =0;
            else regions[a].color = 0xffc0c0c0;
@@ -300,6 +301,7 @@ void call_AI(region regions[50]) {
         int distance = 1000000000;
         if (regions[j].existence == 1 && regions[j].color != 0xff0000cc && regions[j].color != 0xff8cB4d2 && regions[j].color != 0xffc0c0c0) {
             for (int i = 0; i <= reg_head; i++) {
+                //if()
                   if (regions[i].existence == 1 && regions[i].color != 0xffc0c0c0 && i!=j) {
                     if(pow((regions[j].c_x - regions[i].c_x),2) + pow((regions[j].c_y - regions[i].c_y),2) <= distance && regions[i].color != regions[j].color){
                         distance = pow((regions[j].c_x - regions[i].c_x),2) + pow((regions[j].c_y - regions[i].c_y),2);
@@ -423,19 +425,48 @@ void normalize(soldier army[500] , int player_count) {
     }
 }
 
-int Run(int reg_count , int player_count , SDL_Renderer *sdlRenderer , int random_or_not)
+int win_condition(region regions[50] , Uint32 colors[10] , int player_count){
+    int flag = 1;
+    for(int i=0 ; i<player_count ;i++){
+        flag =1;
+        for(int j=0 ; j<=reg_head && flag; j++){
+            if(regions[j].color != colors[i] && regions[j].color != 0xff8cB4d2 && regions[j].color != 0xffc0c0c0){
+                flag = 0;
+            }
+        }if(flag)return i;
+    }
+    return -1;
+}
+
+void reinit(soldier army[500] , region regions[50] , region regions_fill[50]){
+    region region_mio [1] = {0};
+      for(int i=0 ; i<50 ; i++) {
+            regions[i] = region_mio[0];
+            regions_fill[i] = region_mio[0];
+    }
+      soldier mio [1]={0};
+    for(int i=0 ; i<500 ; i++){
+        army[i] = mio[0];
+    }
+}
+
+int Run(int reg_count , int player_count , SDL_Renderer *sdlRenderer , int random_or_not , Mix_Music *start ,SDL_bool * shallExit)
 {
+    int c =-1 ;
+    reg_head = 0;
+    army_head = 0;
+    selected = -1;
+    spell_head = 0;
     if(random_or_not != 5){
         srand(random_or_not);
         player_count = rand()%10 + 1;
         reg_count = rand()%10 + 10;
     }
-    else if(random_or_not == 5)
+    else
         srand(time(NULL));
     spell spells[15];
     for(int i=0 ; i<15 ; i++)spells[i].existance =0;
     for(int i=0 ; i<10 ; i++)on_spell[i].type = -1;
-    SDL_bool shallExit = SDL_FALSE;
     Uint32 colors [10];
     region regions[50];
     region regions_fill[50];
@@ -457,20 +488,23 @@ int Run(int reg_count , int player_count , SDL_Renderer *sdlRenderer , int rando
     SDL_RendererFlip flip = SDL_FLIP_HORIZONTAL;
     SDL_Surface * bg_surface = IMG_Load("grass.png");
     SDL_Texture* backg = SDL_CreateTextureFromSurface(sdlRenderer, bg_surface);
+    SDL_FreeSurface(bg_surface);
     TTF_Font * font = TTF_OpenFont("fonts/arial.ttf" , 100);
     SDL_Surface *surface_tower = IMG_Load("tower.png");
     SDL_Surface *arrow_sur = IMG_Load("arrow.png");
     SDL_Surface *ruins_sur = IMG_Load("rock.png");
     SDL_Texture *ruins_tex = SDL_CreateTextureFromSurface(sdlRenderer, ruins_sur);
+    SDL_FreeSurface(ruins_sur);
     SDL_Surface *barracks_sur = IMG_Load("barracks.png");
     SDL_Texture *barracks_tex = SDL_CreateTextureFromSurface(sdlRenderer, barracks_sur);
     SDL_Texture *towers = SDL_CreateTextureFromSurface(sdlRenderer, surface_tower);
-    while(shallExit == SDL_FALSE) {
+    SDL_Rect state_r = {250 , 150, 900 , 170};
+    while(*shallExit == SDL_FALSE && c==-1) {
         for(int i=0 ; i<player_count ; i++){
             if(rand() % 300 == 5)drop_spell(regions,colors[i],spells);
         }
         normalize(army , player_count);
-        call_AI(regions);
+        //call_AI(regions);
         attack(army,regions ,colors,player_count);
         spells_active(army,spells,player_count ,counter ,regions,colors);
         SDL_RenderClear(sdlRenderer);
@@ -481,7 +515,29 @@ int Run(int reg_count , int player_count , SDL_Renderer *sdlRenderer , int rando
         nums(font , regions , sdlRenderer);
         draw_spell(spells , sdlRenderer , spell_tex);
         draw_arrow(sdlRenderer , regions , arrow_sur);
-        SDL_RenderPresent(sdlRenderer);
+        c = win_condition(regions,colors,player_count);
+        if(c != -1){
+            SDL_Color state_color = {0,0,0,5};
+            if(start != NULL)Mix_FreeMusic(start);
+            start = Mix_LoadMUS("victory.mp3");
+            if(start != NULL)Mix_PlayMusic(start,1);
+            while(state_color.a <254) {
+                SDL_Surface *state_sur = TTF_RenderText_Solid(font, "__VICTORY__", state_color);
+                SDL_Texture *state_tx = SDL_CreateTextureFromSurface(sdlRenderer, state_sur);
+                SDL_FreeSurface(state_sur);
+                SDL_RenderClear(sdlRenderer);
+                background(backg , sdlRenderer);
+                draw_shapes(regions , sdlRenderer);
+                draw_barracks(sdlRenderer,regions,barracks_tex ,towers ,ruins_tex,colors,player_count , flip);
+                SDL_RenderCopy(sdlRenderer, state_tx, NULL, &state_r);
+                SDL_DestroyTexture(state_tx);
+                SDL_RenderPresent(sdlRenderer);
+                SDL_Delay(1000 / FPS);
+                state_color.a++;
+            }
+            SDL_Delay(4000);
+        }
+        else SDL_RenderPresent(sdlRenderer);
         SDL_Event sdlEvent;
         SDL_Delay(1000/FPS);
         for(int i=0 ; regions[i].c_y !=0 ; i++) {
@@ -496,7 +552,7 @@ int Run(int reg_count , int player_count , SDL_Renderer *sdlRenderer , int rando
         while (SDL_PollEvent(&sdlEvent)) {
             switch (sdlEvent.type) {
                 case SDL_QUIT:
-                    shallExit = SDL_TRUE;
+                    *shallExit = SDL_TRUE;
                     break;
                 case SDL_MOUSEMOTION:
                     for(int i=0 ; i <= reg_head ; i++) {
@@ -510,7 +566,7 @@ int Run(int reg_count , int player_count , SDL_Renderer *sdlRenderer , int rando
                     break;
                 case SDL_MOUSEBUTTONDOWN:
                     for(int i=0 ;i <= reg_head ; i++) {
-                        if (regions[i].existence == 1 && regions[i].color == 0xff0000cc && regions[i].color != 0xff8cB4d2 && regions[i].color != 0xffc0c0c0 && pow(sdlEvent.motion.x - regions[i].c_x, 2) + pow(sdlEvent.motion.y - regions[i].c_y, 2) <
+                        if (regions[i].existence == 1 && /*regions[i].color == 0xff0000cc &&*/ regions[i].color != 0xff8cB4d2 && regions[i].color != 0xffc0c0c0 && pow(sdlEvent.motion.x - regions[i].c_x, 2) + pow(sdlEvent.motion.y - regions[i].c_y, 2) <
                             pow(regions[i].r_cpy - 30, 2))
                             selected = i;
                     }
@@ -527,5 +583,16 @@ int Run(int reg_count , int player_count , SDL_Renderer *sdlRenderer , int rando
             }
         }
     }
-    return 0;
+    SDL_FreeSurface(surface_tower);
+    SDL_FreeSurface(barracks_sur);
+    SDL_FreeSurface(arrow_sur);
+    SDL_DestroyTexture(backg);
+    SDL_DestroyTexture(ruins_tex);
+    for(int i=0;i<10;i++)SDL_DestroyTexture(sol_tex[i]);
+    for(int i=0;i<4;i++)SDL_DestroyTexture(spell_tex[i]);
+    SDL_DestroyTexture(towers);
+    SDL_DestroyTexture(barracks_tex);
+    TTF_CloseFont(font);
+    reinit(army,regions,regions_fill);
+    return c;
 }

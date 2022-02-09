@@ -1,1 +1,1 @@
-/usr/bin/cc   -rdynamic CMakeFiles/state.dir/src/gameplay.c.o CMakeFiles/state.dir/src/get_config.c.o CMakeFiles/state.dir/src/main.c.o CMakeFiles/state.dir/src/menu.c.o  -o state  -lm -lSDL2 -lSDL2_gfx -lSDL2_image -lSDL2_ttf -lSDL2_mixer 
+/usr/bin/cc   -rdynamic CMakeFiles/state.dir/src/add_scores.c.o CMakeFiles/state.dir/src/gameplay.c.o CMakeFiles/state.dir/src/get_config.c.o CMakeFiles/state.dir/src/leaderboard.c.o CMakeFiles/state.dir/src/main.c.o CMakeFiles/state.dir/src/menu.c.o  -o state  -lm -lSDL2 -lSDL2_gfx -lSDL2_image -lSDL2_ttf -lSDL2_mixer 

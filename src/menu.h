@@ -5,8 +5,10 @@
 #ifndef STATE_IO_MENU_H
 #define STATE_IO_MENU_H
 
-int Run_menu( SDL_Renderer *sdlRenderer , TTF_Font * font);
-int default_map(SDL_Renderer * sdlRenderer , TTF_Font * font);
-int p_r(int random_config[2] , SDL_Renderer *sdlRenderer , TTF_Font * font) ;
+int Run_menu( SDL_Renderer *sdlRenderer , TTF_Font * font , SDL_bool *shallExit , char name[20]);
+int default_map(SDL_Renderer * sdlRenderer , TTF_Font * font , SDL_bool *shallExit);
+int p_r(int random_config[2] , SDL_Renderer *sdlRenderer , TTF_Font * font , SDL_bool *shallExit) ;
+int leaderboard(SDL_bool * shallExit , SDL_Renderer * sdlRenderer , TTF_Font * font);
+void add_scores(int winning_team , char name[20]);
 
 #endif //STATE_IO_MENU_H

@@ -4,8 +4,7 @@
 
 #include "all.h"
 
-int p_r(int random_config[2] , SDL_Renderer *sdlRenderer , TTF_Font * font) {
-    SDL_bool shallExit = SDL_FALSE;
+int p_r(int random_config[2] , SDL_Renderer *sdlRenderer , TTF_Font * font , SDL_bool* shallExit) {
     int flag =0 ;
     char pc[4]={0};
     char rc[4]={0};
@@ -32,7 +31,7 @@ int p_r(int random_config[2] , SDL_Renderer *sdlRenderer , TTF_Font * font) {
     SDL_Color rc_color = {102, 0, 0, 255};
     SDL_Surface * rc_sur;
     SDL_Texture * rc_tx ;
-    while (shallExit == SDL_FALSE) {
+    while (*shallExit == SDL_FALSE) {
         pc_sur = TTF_RenderText_Solid(font , pc , pc_color);
         pc_tx = SDL_CreateTextureFromSurface(sdlRenderer, pc_sur);
         rc_sur = TTF_RenderText_Solid(font , rc , rc_color);
@@ -53,7 +52,7 @@ int p_r(int random_config[2] , SDL_Renderer *sdlRenderer , TTF_Font * font) {
         while (SDL_PollEvent(&sdlEvent)) {
             switch (sdlEvent.type) {
                 case SDL_QUIT:
-                    shallExit = SDL_TRUE;
+                    *shallExit = SDL_TRUE;
                     break;
                 case SDL_KEYDOWN:
                     if(sdlEvent.key.keysym.sym  == SDLK_BACKSPACE) {
@@ -115,8 +114,7 @@ int p_r(int random_config[2] , SDL_Renderer *sdlRenderer , TTF_Font * font) {
 }
 
 
-int default_map(SDL_Renderer * sdlRenderer , TTF_Font * font) {
-    SDL_bool shallExit = SDL_FALSE;
+int default_map(SDL_Renderer * sdlRenderer , TTF_Font * font ,SDL_bool *shallExit) {
     SDL_Rect rect = {0 , 0 , 1500 , 800};
     SDL_Surface *bg_surface = IMG_Load("bg2.png");
     SDL_Texture *background = SDL_CreateTextureFromSurface(sdlRenderer, bg_surface);
@@ -144,7 +142,7 @@ int default_map(SDL_Renderer * sdlRenderer , TTF_Font * font) {
     SDL_FreeSurface(sur7);
     SDL_Event sdlEvent;
     SDL_Delay(1000 / FPS);
-    while (shallExit == SDL_FALSE) {
+    while (*shallExit == SDL_FALSE) {
         SDL_RenderClear(sdlRenderer);
         SDL_RenderCopy(sdlRenderer , background , NULL , &rect);
         SDL_RenderCopy(sdlRenderer, tex20 , NULL, &rect20);
@@ -157,7 +155,7 @@ int default_map(SDL_Renderer * sdlRenderer , TTF_Font * font) {
         while (SDL_PollEvent(&sdlEvent)) {
             switch (sdlEvent.type) {
                 case SDL_QUIT:
-                    shallExit = SDL_TRUE;
+                    *shallExit = SDL_TRUE;
                     break;
                 case SDL_MOUSEBUTTONDOWN:
                     if (sdlEvent.motion.x > 200 && sdlEvent.motion.x < 700 && sdlEvent.motion.y > 170 &&

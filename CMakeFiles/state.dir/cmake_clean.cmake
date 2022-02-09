@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/state.dir/src/add_scores.c.o"
   "CMakeFiles/state.dir/src/gameplay.c.o"
   "CMakeFiles/state.dir/src/get_config.c.o"
+  "CMakeFiles/state.dir/src/leaderboard.c.o"
   "CMakeFiles/state.dir/src/main.c.o"
   "CMakeFiles/state.dir/src/menu.c.o"
   "state"

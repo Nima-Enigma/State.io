@@ -123,6 +123,33 @@ state/fast:
 	$(MAKE) -f CMakeFiles/state.dir/build.make CMakeFiles/state.dir/build
 .PHONY : state/fast
 
+src/add_scores.o: src/add_scores.c.o
+
+.PHONY : src/add_scores.o
+
+# target to build an object file
+src/add_scores.c.o:
+	$(MAKE) -f CMakeFiles/state.dir/build.make CMakeFiles/state.dir/src/add_scores.c.o
+.PHONY : src/add_scores.c.o
+
+src/add_scores.i: src/add_scores.c.i
+
+.PHONY : src/add_scores.i
+
+# target to preprocess a source file
+src/add_scores.c.i:
+	$(MAKE) -f CMakeFiles/state.dir/build.make CMakeFiles/state.dir/src/add_scores.c.i
+.PHONY : src/add_scores.c.i
+
+src/add_scores.s: src/add_scores.c.s
+
+.PHONY : src/add_scores.s
+
+# target to generate assembly for a file
+src/add_scores.c.s:
+	$(MAKE) -f CMakeFiles/state.dir/build.make CMakeFiles/state.dir/src/add_scores.c.s
+.PHONY : src/add_scores.c.s
+
 src/gameplay.o: src/gameplay.c.o
 
 .PHONY : src/gameplay.o
@@ -176,6 +203,33 @@ src/get_config.s: src/get_config.c.s
 src/get_config.c.s:
 	$(MAKE) -f CMakeFiles/state.dir/build.make CMakeFiles/state.dir/src/get_config.c.s
 .PHONY : src/get_config.c.s
+
+src/leaderboard.o: src/leaderboard.c.o
+
+.PHONY : src/leaderboard.o
+
+# target to build an object file
+src/leaderboard.c.o:
+	$(MAKE) -f CMakeFiles/state.dir/build.make CMakeFiles/state.dir/src/leaderboard.c.o
+.PHONY : src/leaderboard.c.o
+
+src/leaderboard.i: src/leaderboard.c.i
+
+.PHONY : src/leaderboard.i
+
+# target to preprocess a source file
+src/leaderboard.c.i:
+	$(MAKE) -f CMakeFiles/state.dir/build.make CMakeFiles/state.dir/src/leaderboard.c.i
+.PHONY : src/leaderboard.c.i
+
+src/leaderboard.s: src/leaderboard.c.s
+
+.PHONY : src/leaderboard.s
+
+# target to generate assembly for a file
+src/leaderboard.c.s:
+	$(MAKE) -f CMakeFiles/state.dir/build.make CMakeFiles/state.dir/src/leaderboard.c.s
+.PHONY : src/leaderboard.c.s
 
 src/main.o: src/main.c.o
 
@@ -240,12 +294,18 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... state"
+	@echo "... src/add_scores.o"
+	@echo "... src/add_scores.i"
+	@echo "... src/add_scores.s"
 	@echo "... src/gameplay.o"
 	@echo "... src/gameplay.i"
 	@echo "... src/gameplay.s"
 	@echo "... src/get_config.o"
 	@echo "... src/get_config.i"
 	@echo "... src/get_config.s"
+	@echo "... src/leaderboard.o"
+	@echo "... src/leaderboard.i"
+	@echo "... src/leaderboard.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

@@ -5,6 +5,7 @@
 #define STATE_IO_MAIN_H
 
 #include <sys/time.h>
+#include "SDL2/SDL_mixer.h"
 
 typedef struct region{
     char existence;
@@ -66,6 +67,6 @@ void draw_arrow(SDL_Renderer *sdlRenderer , region regions [50] , SDL_Surface * 
 void attack(soldier army [500]  ,region regions[50] , Uint32 colors[10], int player_count);
 int ready(soldier guy);
 void draw_soldiers_and_attack(SDL_Renderer *sdlRenderer ,region regions[50] , SDL_Texture * sol_tex[10] ,soldier army[500] ,SDL_RendererFlip flip , Uint32 colors[10] , int player_count);
-int Run(int reg_count , int player_count, SDL_Renderer *sdlRenderer , int random_or_not);
+int Run(int reg_count , int player_count, SDL_Renderer *sdlRenderer , int random_or_not , Mix_Music *start , SDL_bool *shallExit);
 
 #endif //STATE_IO_MAIN_H

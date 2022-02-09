@@ -4,8 +4,10 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
+  "/home/nima/Desktop/state.io/src/add_scores.c" "/home/nima/Desktop/state.io/CMakeFiles/state.dir/src/add_scores.c.o"
   "/home/nima/Desktop/state.io/src/gameplay.c" "/home/nima/Desktop/state.io/CMakeFiles/state.dir/src/gameplay.c.o"
   "/home/nima/Desktop/state.io/src/get_config.c" "/home/nima/Desktop/state.io/CMakeFiles/state.dir/src/get_config.c.o"
+  "/home/nima/Desktop/state.io/src/leaderboard.c" "/home/nima/Desktop/state.io/CMakeFiles/state.dir/src/leaderboard.c.o"
   "/home/nima/Desktop/state.io/src/main.c" "/home/nima/Desktop/state.io/CMakeFiles/state.dir/src/main.c.o"
   "/home/nima/Desktop/state.io/src/menu.c" "/home/nima/Desktop/state.io/CMakeFiles/state.dir/src/menu.c.o"
   )
