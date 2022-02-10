@@ -13,54 +13,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4995a77a-152a-4383-b759-d72b6877e8cf" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/14.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/15.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/20.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/A.jpeg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/state.dir/C.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/state.dir/C.includecache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/state.dir/src/add_scores.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/state.dir/src/add_scores.c.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/state.dir/src/gameplay.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/state.dir/src/gameplay.c.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/state.dir/src/get_config.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/state.dir/src/get_config.c.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/state.dir/src/leaderboard.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/state.dir/src/leaderboard.c.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/state.dir/src/main.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/state.dir/src/main.c.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/state.dir/src/menu.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/state.dir/src/menu.c.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/arrow.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/barracks.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bg2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/grass.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/leaderboard.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/leaderboard2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/menu_bg.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mio.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/power.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/productivity.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reverse.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rock.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sea.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/soldier.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/soldier.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/soldier1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/soldier10.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/soldier2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/soldier3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/soldier4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/soldier5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/soldier6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/soldier7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/soldier8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/soldier9.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/soldiert.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/speed.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/add_scores.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/add_scores.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gameplay.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameplay.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gameplay.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameplay.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/get_config.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/get_config.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/leaderboard.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/leaderboard.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/leaderboard.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/leaderboard.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/menu.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/menu.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/state" beforeDir="false" afterPath="$PROJECT_DIR$/state" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tower.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,13 +72,30 @@
     <property name="cf.first.check.clang-format" value="false" />
     <property name="cidr.known.project.marker" value="true" />
     <property name="cmake.loaded.for.project" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../nima" />
+    <property name="last_opened_file_path" value="/" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="CMakeSettings" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.make" />
+  </component>
+  <component name="RunManager" selected="CMake Application.Unnamed">
+    <configuration name="Unnamed" type="CMakeRunConfiguration" factoryName="Application" nameIsGenerated="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" EXPLICIT_BUILD_TARGET_NAME="all">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Unnamed" type="MAKEFILE_TARGET_RUN_CONFIGURATION" factoryName="Makefile" nameIsGenerated="true">
+      <makefile filename="" target="" workingDirectory="" arguments="">
+        <envs />
+      </makefile>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="CMake Application.Unnamed" />
+      <item itemvalue="Makefile Target.Unnamed" />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -210,6 +193,15 @@
       <workItem from="1644340653699" duration="18753000" />
       <workItem from="1644400234289" duration="17714000" />
       <workItem from="1644425861928" duration="1344000" />
+      <workItem from="1644430341249" duration="3750000" />
+      <workItem from="1644483292963" duration="2052000" />
+      <workItem from="1644485652846" duration="900000" />
+      <workItem from="1644486744926" duration="17000" />
+      <workItem from="1644486773244" duration="1866000" />
+      <workItem from="1644488990095" duration="1000" />
+      <workItem from="1644490048835" duration="524000" />
+      <workItem from="1644490871695" duration="5376000" />
+      <workItem from="1644505582887" duration="12983000" />
     </task>
     <servers />
   </component>

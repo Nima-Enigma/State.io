@@ -85,10 +85,18 @@ int leaderboard(SDL_bool * shallExit , SDL_Renderer * sdlRenderer , TTF_Font * f
                     break;
                 case SDL_MOUSEBUTTONDOWN:
                     if(sdlEvent.motion.x > 550 && sdlEvent.motion.x < 850 && sdlEvent.motion.y > 30 && sdlEvent.motion.y < 100){
+                        SDL_DestroyTexture(lb_tx);
+                        SDL_DestroyTexture(menu_tx);
+                        SDL_DestroyTexture(background);
+                        for(int i=0 ; i<7; i++)SDL_DestroyTexture(names_tex[i]);
                         return 1;
                     }
             }
         }
     }
+    SDL_DestroyTexture(lb_tx);
+    SDL_DestroyTexture(menu_tx);
+    SDL_DestroyTexture(background);
+    for(int i=0 ; i<7; i++)SDL_DestroyTexture(names_tex[i]);
     return 0 ;
 }

@@ -5,6 +5,7 @@
 #include"all.h"
 #include "gameplay.h"
 
+
 int reg_head = 0;
 int army_head = 0;
 int selected = -1;
@@ -64,7 +65,8 @@ void give_colors(region regions [50] ,int reg_count ,int player_count , Uint32 c
     if(random_config != 9) {
         for (int i = 0; i < player_count; i++) {
             int a;
-            a = rand() % (reg_head + 1);
+            if(random_config == 5)a = rand() % (reg_head + 1);
+            else a = rand() % (reg_head);
             if (regions[a].color == 0xff8cB4d2) {
                 regions[a].color = colors[i];
                 regions[a].soldiers = 0;
@@ -73,7 +75,8 @@ void give_colors(region regions [50] ,int reg_count ,int player_count , Uint32 c
         int copy = reg_head;
         while (copy > reg_count) {
             int a;
-            a = rand() % (reg_head + 1);
+            if(random_config == 5)a = rand() % (reg_head + 1);
+            else a = rand() % (reg_head);
             if (regions[a].color == 0xff8cB4d2 && regions[a].existence == 1) {
                 if (rand() % 5)regions[a].existence = 0;
                 else regions[a].color = 0xffc0c0c0;
@@ -216,7 +219,7 @@ void draw_arrow(SDL_Renderer *sdlRenderer , region regions [50] , SDL_Surface * 
     }
 }
 
-void attack(soldier army [500]  , region regions[50] , Uint32 colors[10], int player_count){
+void attack(soldier army [700]  , region regions[50] , Uint32 colors[10], int player_count){
     for(int i=0 ; i<=reg_head ; i++){
         if(regions[i].attack != -1 && regions[i].existence == 1){
             double mytime = 0 ;
@@ -224,7 +227,7 @@ void attack(soldier army [500]  , region regions[50] , Uint32 colors[10], int pl
             gettimeofday(&start , NULL);
             int a = regions[i].soldiers;
             for(int m=0 ; m <a ; m++){
-                if(army_head == 500)army_head =0;
+                if(army_head == 700)army_head =0;
                 int a = rand()%100;
                 int b = rand()%100;
                 army[army_head].dest_x =regions[regions[i].attack].c_x -30 ;
@@ -260,11 +263,11 @@ int ready(soldier guy){
     else return 0;
 }
 
-void draw_soldiers_and_attack(SDL_Renderer *sdlRenderer ,region regions[50] , SDL_Texture * sol_tex[10] ,soldier army[500] ,SDL_RendererFlip flip , Uint32 colors[10] , int player_count){
-    for(int i = 0 ; i<500 ; i++) {
+void draw_soldiers_and_attack(SDL_Renderer *sdlRenderer ,region regions[50] , SDL_Texture * sol_tex[10] ,soldier army[700] ,SDL_RendererFlip flip , Uint32 colors[10] , int player_count){
+    for(int i = 0 ; i<700 ; i++) {
         if (army[i].existence == 0)continue;
         if (ready(army[i])) {
-            for (int j = i + 1; j < 500; j++) {
+            for (int j = i + 1; j < 700; j++) {
                 if (army[i].color != army[j].color && army[i].x - army[j].x > -10 && army[i].x - army[j].x < 10 &&
                     army[i].y - army[j].y > -10 && army[i].y - army[j].y < 10 && army[j].existence != 0) {
                     int temp = army[i].existence;
@@ -309,24 +312,60 @@ void draw_soldiers_and_attack(SDL_Renderer *sdlRenderer ,region regions[50] , SD
     }
 }
 
-void call_AI(region regions[50]) {
-    for (int j = 0; j <= reg_head; j++) {
-        int distance = 1000000000;
-        if (regions[j].existence == 1 && regions[j].color != 0xff0000cc && regions[j].color != 0xff8cB4d2 &&
-            regions[j].color != 0xffc0c0c0) {
-            for (int i = 0; i <= reg_head; i++) {
-                if (regions[i].existence == 1 && regions[i].color != 0xffc0c0c0 && i != j) {
-                    if (pow((regions[j].c_x - regions[i].c_x), 2) + pow((regions[j].c_y - regions[i].c_y), 2) <=
-                        distance && regions[i].color == 0xff8cB4d2/*regions[i].color != regions[j].color &&*/&& regions[j].soldiers >= 20) {
-                        distance = pow((regions[j].c_x - regions[i].c_x), 2) + pow((regions[j].c_y - regions[i].c_y), 2);
-                        regions[j].attack = i;
+void call_AI(region regions[50] , struct timeval game_start , int player_count) {
+    struct timeval now;
+    gettimeofday(&now, NULL);
+    if(player_count > 3) {
+        for (int j = 0; j <= reg_head; j++) {
+            int distance = 1000000000;
+            if (regions[j].existence == 1 && regions[j].color != 0xff0000cc && regions[j].color != 0xff8cB4d2 &&
+                regions[j].color != 0xffc0c0c0) {
+                for (int i = 0; i <= reg_head; i++) {
+                    if (now.tv_sec - game_start.tv_sec < 16 && regions[i].existence == 1 &&
+                        regions[i].color != 0xffc0c0c0 && i != j) {
+                        if (pow((regions[j].c_x - regions[i].c_x), 2) + pow((regions[j].c_y - regions[i].c_y), 2) <=
+                            distance && regions[i].color == 0xff8cB4d2 &&
+                            regions[j].soldiers >= 20) {
+                            distance = pow((regions[j].c_x - regions[i].c_x), 2) +
+                                       pow((regions[j].c_y - regions[i].c_y), 2);
+                            regions[j].attack = i;
+                        }
+                    }
+                }
+                for (int i = 0; i <= reg_head; i++) {
+                    if (now.tv_sec - game_start.tv_sec >= 16 && regions[i].existence == 1 &&
+                        regions[i].color != 0xffc0c0c0 && i != j) {
+                        if (pow((regions[j].c_x - regions[i].c_x), 2) + pow((regions[j].c_y - regions[i].c_y), 2) <=
+                            distance && regions[i].color != regions[j].color) {
+                            distance = pow((regions[j].c_x - regions[i].c_x), 2) +
+                                       pow((regions[j].c_y - regions[i].c_y), 2);
+                            regions[j].attack = i;
+                        }
                     }
                 }
             }
-            for (int i = 0; i <= reg_head; i++) {
-                if (regions[i].existence == 1 && regions[i].color != 0xffc0c0c0 && i != j) {
-                    if (regions[i].soldiers < 1 && regions[j].soldiers > 15)
-                        regions[j].attack = i;
+        }
+    }
+    else {
+        for (int j = 0; j <= reg_head; j++) {
+            int distance = 1000000000;
+            if (regions[j].existence == 1 && regions[j].color != 0xff0000cc && regions[j].color != 0xff8cB4d2 &&
+                regions[j].color != 0xffc0c0c0) {
+                for (int i = 0; i <= reg_head; i++) {
+                    if (regions[i].existence == 1 && regions[i].color != 0xffc0c0c0 && i != j) {
+                        if (pow((regions[j].c_x - regions[i].c_x), 2) + pow((regions[j].c_y - regions[i].c_y), 2) <=
+                            distance && regions[i].color != regions[j].color) {
+                            distance = pow((regions[j].c_x - regions[i].c_x), 2) +
+                                       pow((regions[j].c_y - regions[i].c_y), 2);
+                            regions[j].attack = i;
+                        }
+                    }
+                }
+                for (int i = 0; i <= reg_head; i++) {
+                    if (now.tv_sec - game_start.tv_sec > 5 && regions[i].existence == 1 && regions[i].color != 0xffc0c0c0 && i != j && regions[i].color != regions[j].color) {
+                        if (regions[i].soldiers < 5)
+                            regions[j].attack = i;
+                    }
                 }
             }
         }
@@ -374,8 +413,8 @@ void draw_spell(spell spells[15] , SDL_Renderer * sdlRenderer , SDL_Texture * sp
     }
 }
 
-void spells_active(soldier army[500],spell spells[15] ,int player_count , int counter , region regions[50] , Uint32 colors[10]) {
-    for (int i = 0; i < 500; i++) {
+void spells_active(soldier army[700],spell spells[15] ,int player_count , int counter , region regions[50] , Uint32 colors[10]) {
+    for (int i = 0; i < 700; i++) {
         if (army[i].existence == 0 || on_spell[army[i].team].type != -1)continue;
         for (int j = 0; j < 14; j++) {
             if (spells[j].color != army[i].color)continue;
@@ -390,7 +429,7 @@ void spells_active(soldier army[500],spell spells[15] ,int player_count , int co
     for(int i=0 ; i<player_count ; i++){
         if(on_spell[i].type == -1)continue;
         if(on_spell[i].type == 0){
-            for(int j=0 ; j<500 ;j++){
+            for(int j=0 ; j<700 ;j++){
                 if(army[j].team == i){
                     if(pow(army[j].v_y ,2) + pow(army[j].v_x , 2) < 20){
                         army[j].v_x *=2;
@@ -411,7 +450,7 @@ void spells_active(soldier army[500],spell spells[15] ,int player_count , int co
         }
         if(on_spell[i].type == 1){
             if(counter == 20){
-                for(int j=0 ;j<500 ;j++){
+                for(int j=0 ;j<700 ;j++){
                     if(army[j].team == i && army[j].existence ==1)
                         army[j].existence =2;
                 }
@@ -420,7 +459,7 @@ void spells_active(soldier army[500],spell spells[15] ,int player_count , int co
     }
 }
 
-void normalize(soldier army[500] , int player_count) {
+void normalize(soldier army[700] , int player_count) {
     struct timeval now;
     gettimeofday(&now, NULL);
     for (int i = 0; i < player_count; i++) {
@@ -429,7 +468,7 @@ void normalize(soldier army[500] , int player_count) {
                 on_spell[i].type = -1;
         }
         if (on_spell[i].type == -1){
-            for (int j = 0; j < 500; j++) {
+            for (int j = 0; j < 700; j++) {
                 if (army[j].team == i) {
                     if(army[j].existence == 2)army[j].existence -- ;
                 }
@@ -457,14 +496,14 @@ int win_condition(region regions[50] , Uint32 colors[10] , int player_count){
     return -1;
 }
 
-void reinit(soldier army[500] , region regions[50] , region regions_fill[50]){
+void reinit(soldier army[700] , region regions[50] , region regions_fill[50]){
     region region_mio [1] = {0};
       for(int i=0 ; i<50 ; i++) {
             regions[i] = region_mio[0];
             regions_fill[i] = region_mio[0];
     }
       soldier mio [1]={0};
-    for(int i=0 ; i<500 ; i++){
+    for(int i=0 ; i<700 ; i++){
         army[i] = mio[0];
     }
 }
@@ -481,19 +520,19 @@ int Run(int reg_count , int player_count , SDL_Renderer *sdlRenderer , int rando
         player_count = rand()%10 + 1;
         reg_count = rand()%10 + 10;
     }
+    else
+        srand(time(NULL));
     if(random_or_not == 9){
         player_count = 2;
         reg_count = 12;
     }
-    else
-        srand(time(NULL));
     spell spells[15];
     for(int i=0 ; i<15 ; i++)spells[i].existance =0;
     for(int i=0 ; i<10 ; i++)on_spell[i].type = -1;
     Uint32 colors [10];
     region regions[50];
     region regions_fill[50];
-    soldier army[500];
+    soldier army[700];
     SDL_Surface * sol_sur[10];
     SDL_Texture * sol_tex[10];
     SDL_Surface * spell_sur[10];
@@ -523,12 +562,14 @@ int Run(int reg_count , int player_count , SDL_Renderer *sdlRenderer , int rando
     SDL_Texture *barracks_tex = SDL_CreateTextureFromSurface(sdlRenderer, barracks_sur);
     SDL_Texture *towers = SDL_CreateTextureFromSurface(sdlRenderer, surface_tower);
     SDL_Rect state_r = {250 , 150, 900 , 170};
+    struct timeval game_start;
+    gettimeofday(&game_start,NULL);
     while(*shallExit == SDL_FALSE && c==-1) {
         for(int i=0 ; i<player_count ; i++){
             if(rand() % 300 == 5)drop_spell(regions,colors[i],spells);
         }
         normalize(army , player_count);
-        call_AI(regions);
+        call_AI(regions , game_start , player_count);
         attack(army,regions ,colors,player_count);
         spells_active(army,spells,player_count ,counter ,regions,colors);
         SDL_RenderClear(sdlRenderer);
@@ -545,7 +586,7 @@ int Run(int reg_count , int player_count , SDL_Renderer *sdlRenderer , int rando
             //if(start != NULL)Mix_FreeMusic(start);
             start = Mix_LoadMUS("victory.mp3");
             if(start != NULL)Mix_PlayMusic(start,1);
-            while(state_color.a <254) {
+            while(state_color.a <239) {
                 SDL_Surface *state_sur = TTF_RenderText_Solid(font2, "__Victory__", state_color);
                 SDL_Texture *state_tx = SDL_CreateTextureFromSurface(sdlRenderer, state_sur);
                 SDL_Surface *state_sur2 = TTF_RenderText_Solid(font2, "__Defeat__", state_color);
@@ -562,9 +603,8 @@ int Run(int reg_count , int player_count , SDL_Renderer *sdlRenderer , int rando
                 SDL_Delay(1000 / FPS);
                 state_color.a++ ;
             }
-            SDL_Delay(4000);
         }
-        else SDL_RenderPresent(sdlRenderer);
+        SDL_RenderPresent(sdlRenderer);
         SDL_Event sdlEvent;
         SDL_Delay(1000/FPS);
         for(int i=0 ; regions[i].c_y !=0 ; i++) {
@@ -616,7 +656,7 @@ int Run(int reg_count , int player_count , SDL_Renderer *sdlRenderer , int rando
     SDL_DestroyTexture(backg);
     SDL_DestroyTexture(ruins_tex);
     for(int i=0;i<10;i++)SDL_DestroyTexture(sol_tex[i]);
-    for(int i=0;i<4;i++)SDL_DestroyTexture(spell_tex[i]);
+    for(int i=0;i<10;i++)SDL_DestroyTexture(spell_tex[i]);
     SDL_DestroyTexture(towers);
     SDL_DestroyTexture(barracks_tex);
     TTF_CloseFont(font);

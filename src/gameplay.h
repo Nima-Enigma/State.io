@@ -52,7 +52,7 @@ typedef struct on_spells{
 }on_spells;
 
 
-void call_AI(region regions[50]);
+void call_AI(region regions[50] , struct timeval game_start , int player_count);
 void background(SDL_Texture * background , SDL_Renderer *sdlRenderer);
 void initialize(region regions[50], direction directions[6] , region regions_fill[50] ,int map [1500][800]);
 int check_availability(int map[1500][800],region regions[50], direction next , int i);
@@ -68,5 +68,11 @@ void attack(soldier army [500]  ,region regions[50] , Uint32 colors[10], int pla
 int ready(soldier guy);
 void draw_soldiers_and_attack(SDL_Renderer *sdlRenderer ,region regions[50] , SDL_Texture * sol_tex[10] ,soldier army[500] ,SDL_RendererFlip flip , Uint32 colors[10] , int player_count);
 int Run(int reg_count , int player_count, SDL_Renderer *sdlRenderer , int random_or_not , Mix_Music *start , SDL_bool *shallExit);
+void drop_spell(region regions[50] , Uint32 color , spell spells[15]);
+void draw_spell(spell spells[15] , SDL_Renderer * sdlRenderer , SDL_Texture * spell_tex[4]);
+void spells_active(soldier army[700],spell spells[15] ,int player_count , int counter , region regions[50] , Uint32 colors[10]);
+void normalize(soldier army[700] , int player_count);
+int win_condition(region regions[50] , Uint32 colors[10] , int player_count);
+void reinit(soldier army[700] , region regions[50] , region regions_fill[50]);
 
 #endif //STATE_IO_MAIN_H

@@ -28,7 +28,7 @@ int main(){
         if (a == 5) {
             if (p_r(random_config, sdlRenderer, font , &shallExit) == 1) {
                 SDL_RenderClear(sdlRenderer);
-                if(t%2 == 0)
+                if(t%2 == 1)
                     start = Mix_LoadMUS("music2.mp3");
                 else
                     start = Mix_LoadMUS("gameplay.mp3");
@@ -40,12 +40,12 @@ int main(){
             int b = default_map(sdlRenderer, font , &shallExit);
             if (b != 0) {
                 //if(start != NULL)Mix_FreeMusic(start);
-                if(t%2 == 0)
+                if(t%2 == 1)
                     start = Mix_LoadMUS("music2.mp3");
                 else
                     start = Mix_LoadMUS("gameplay.mp3");
                 if(start != NULL)Mix_PlayMusic(start, -1);
-                int x = Run(2, 1, sdlRenderer, b, start , &shallExit);
+                int x = Run(3, 1, sdlRenderer, b, start , &shallExit);
                 add_scores(x , name);
             }
         }
@@ -55,10 +55,10 @@ int main(){
         SDL_RenderClear(sdlRenderer);
         t++;
     }
+    Mix_FreeMusic(start);
     TTF_CloseFont(font);
     SDL_DestroyRenderer(sdlRenderer);
     SDL_DestroyWindow(sdlWindow);
-    Mix_FreeMusic(start);
     TTF_Quit();
     SDL_Quit();
     return 0;

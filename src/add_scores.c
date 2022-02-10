@@ -17,7 +17,6 @@ void add_scores(int winning_team , char name[20]){
     int scores[40] = {0} ;
     FILE * leaderboard = fopen("src/leaderboard.txt" , "r+");
     int m=0;
-    int a;
     for(int i=0 ;; i++){
         char a = getc(leaderboard);
         if(a == EOF)break;
@@ -39,12 +38,22 @@ void add_scores(int winning_team , char name[20]){
             if(scores[i] < 0)scores[i]=0;
         }
     }
-    if(flamg == 0){
-        if(m == 39)m=0;
+    if(flamg == 0) {
+        if (m == 39)m = 0;
         scores[m] = 0;
-        if(winning_team == 0)scores[m]=30;
-        strcpy(names[m],name);
+        if (winning_team == 0)scores[m] = 30;
+        strcpy(names[m], name);
         m++;
+    }
+    if(winning_team != 0){
+        for(int i=0;i<40;i++) {
+            char a[2];
+            sprintf(a,"%d",winning_team);
+            char b[6]="bot";
+            if (strcmp(strcat(b, a), names[i]) == 0) {
+                scores[i] += 30;
+            }
+        }
     }
     for(int i=0 ; i<40 ; i++){
         for(int j=0 ; j<40 ; j++){
