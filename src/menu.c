@@ -6,7 +6,7 @@
 
 int Run_menu(SDL_Renderer *sdlRenderer , TTF_Font * font ,SDL_bool *shallExit , char name[20]){
     int name_head =0;
-    SDL_Surface * bg_surface = IMG_Load("pics/menu_bg.jpg");
+    SDL_Surface * bg_surface = IMG_Load("../pics/menu_bg.jpg");
     SDL_Texture* background = SDL_CreateTextureFromSurface(sdlRenderer, bg_surface);
     SDL_FreeSurface(bg_surface);
     SDL_Rect rect = {0 , 0 , 1500 , 800};

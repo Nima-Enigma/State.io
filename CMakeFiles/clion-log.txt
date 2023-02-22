@@ -1,4 +1,0 @@
-Cannot generate into /home/nima/Desktop/state.io
-It was created with incompatible generator 'Unix Makefiles'
-
-Please either delete it manually or select another generation directory

@@ -1,0 +1,3 @@
+/home/nima/Desktop/project-NimaEnigma/build/CMakeFiles/state.dir
+/home/nima/Desktop/project-NimaEnigma/build/CMakeFiles/edit_cache.dir
+/home/nima/Desktop/project-NimaEnigma/build/CMakeFiles/rebuild_cache.dir

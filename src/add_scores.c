@@ -15,7 +15,7 @@ void swap1(char **str1_ptr, char **str2_ptr )
 void add_scores(int winning_team , char name[20]){
     char names[40][15] = {0} ;
     int scores[40] = {0} ;
-    FILE * leaderboard = fopen("src/leaderboard.txt" , "r+");
+    FILE * leaderboard = fopen("../src/leaderboard.txt" , "r+");
     int m=0;
     for(int i=0 ;; i++){
         char a = getc(leaderboard);
@@ -65,7 +65,7 @@ void add_scores(int winning_team , char name[20]){
             }
         }
     }
-    freopen("src/leaderboard.txt" , "w" , leaderboard);
+    freopen("../src/leaderboard.txt" , "w" , leaderboard);
     for(int i=0 ; i<m ; i++)
     fprintf(leaderboard , "%s_%d\n" , names[i] , scores[i]);
     fclose(leaderboard);

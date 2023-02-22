@@ -9,7 +9,7 @@ int p_r(int random_config[2] , SDL_Renderer *sdlRenderer , TTF_Font * font , SDL
     char pc[4]={0};
     char rc[4]={0};
     int pc_head = 0;
-    SDL_Surface * bg_surface = IMG_Load("pics/bg2.png");
+    SDL_Surface * bg_surface = IMG_Load("../pics/bg2.png");
     SDL_Texture* background = SDL_CreateTextureFromSurface(sdlRenderer, bg_surface);
     SDL_FreeSurface(bg_surface);
     SDL_Rect pc_r = {1190 , 150, 40 , 60};
@@ -116,7 +116,7 @@ int p_r(int random_config[2] , SDL_Renderer *sdlRenderer , TTF_Font * font , SDL
 
 int default_map(SDL_Renderer * sdlRenderer , TTF_Font * font ,SDL_bool *shallExit) {
     SDL_Rect rect = {0 , 0 , 1500 , 800};
-    SDL_Surface *bg_surface = IMG_Load("pics/bg2.png");
+    SDL_Surface *bg_surface = IMG_Load("../pics/bg2.png");
     SDL_Texture *background = SDL_CreateTextureFromSurface(sdlRenderer, bg_surface);
     SDL_FreeSurface(bg_surface);
     SDL_Rect p_r = {500 , 100, 500 , 60};
@@ -129,19 +129,19 @@ int default_map(SDL_Renderer * sdlRenderer , TTF_Font * font ,SDL_bool *shallExi
     SDL_Texture * ml_tx = SDL_CreateTextureFromSurface(sdlRenderer, ml_sur);
     SDL_FreeSurface(ml_sur);
     SDL_Rect rect20 = {200 , 170 , 1500/3 , 800/3};
-    SDL_Surface *sur20 = IMG_Load("pics/20.png");
+    SDL_Surface *sur20 = IMG_Load("../pics/20.png");
     SDL_Texture *tex20 = SDL_CreateTextureFromSurface(sdlRenderer, sur20);
     SDL_FreeSurface(sur20);
     SDL_Rect rect15 = {750 ,170 , 1500/3 , 800/3};
-    SDL_Surface *sur15 = IMG_Load("pics/15.png");
+    SDL_Surface *sur15 = IMG_Load("../pics/15.png");
     SDL_Texture *tex15 = SDL_CreateTextureFromSurface(sdlRenderer, sur15);
     SDL_FreeSurface(sur15);
     SDL_Rect rect14 = {200 , 450 , 1500/3 , 800/3};
-    SDL_Surface *sur14 = IMG_Load("pics/14.png");
+    SDL_Surface *sur14 = IMG_Load("../pics/14.png");
     SDL_Texture *tex14 = SDL_CreateTextureFromSurface(sdlRenderer, sur14);
     SDL_FreeSurface(sur14);
     SDL_Rect rect7 = {750 , 450 , 1500/3 , 800/3};
-    SDL_Surface *sur7 = IMG_Load("pics/7.png");
+    SDL_Surface *sur7 = IMG_Load("../pics/7.png");
     SDL_Texture *tex7 = SDL_CreateTextureFromSurface(sdlRenderer, sur7);
     SDL_FreeSurface(sur7);
     SDL_Event sdlEvent;

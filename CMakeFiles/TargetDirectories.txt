@@ -1,3 +1,0 @@
-/home/nima/Desktop/state.io/CMakeFiles/edit_cache.dir
-/home/nima/Desktop/state.io/CMakeFiles/rebuild_cache.dir
-/home/nima/Desktop/state.io/CMakeFiles/state.dir

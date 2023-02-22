@@ -150,16 +150,16 @@ void nums(TTF_Font * font , region regions[50] , SDL_Renderer *sdlRenderer) {
 }
 
 void create_sol_tex( SDL_Renderer *sdlRenderer ,SDL_Surface * sol_sur[10],SDL_Texture * sol_tex[10]){
-    sol_sur[0] = IMG_Load("pics/soldier1.png");
-    sol_sur[1] = IMG_Load("pics/soldier2.png");
-    sol_sur[2] = IMG_Load("pics/soldier3.png");
-    sol_sur[3] = IMG_Load("pics/soldier4.png");
-    sol_sur[4] = IMG_Load("pics/soldier5.png");
-    sol_sur[5] = IMG_Load("pics/soldier6.png");
-    sol_sur[6] = IMG_Load("pics/soldier7.png");
-    sol_sur[7] = IMG_Load("pics/soldier8.png");
-    sol_sur[8] = IMG_Load("pics/soldier9.png");
-    sol_sur[9] = IMG_Load("pics/soldier10.png");
+    sol_sur[0] = IMG_Load("../pics/soldier1.png");
+    sol_sur[1] = IMG_Load("../pics/soldier2.png");
+    sol_sur[2] = IMG_Load("../pics/soldier3.png");
+    sol_sur[3] = IMG_Load("../pics/soldier4.png");
+    sol_sur[4] = IMG_Load("../pics/soldier5.png");
+    sol_sur[5] = IMG_Load("../pics/soldier6.png");
+    sol_sur[6] = IMG_Load("../pics/soldier7.png");
+    sol_sur[7] = IMG_Load("../pics/soldier8.png");
+    sol_sur[8] = IMG_Load("../pics/soldier9.png");
+    sol_sur[9] = IMG_Load("../pics/soldier10.png");
     for(int i=0;i<10;i++){
         sol_tex[i] = SDL_CreateTextureFromSurface(sdlRenderer,sol_sur[i]);
         SDL_FreeSurface(sol_sur[i]);
@@ -167,10 +167,10 @@ void create_sol_tex( SDL_Renderer *sdlRenderer ,SDL_Surface * sol_sur[10],SDL_Te
 }
 
 void create_spells_tex(SDL_Renderer *sdlRenderer ,SDL_Surface * spell_sur[10],SDL_Texture * spell_tex[10]){
-    spell_sur[0] = IMG_Load("pics/speed.png");
-    spell_sur[1] = IMG_Load("pics/power.png");
-    spell_sur[2] = IMG_Load("pics/reverse.png");
-    spell_sur[3] = IMG_Load("pics/productivity.png");
+    spell_sur[0] = IMG_Load("../pics/speed.png");
+    spell_sur[1] = IMG_Load("../pics/power.png");
+    spell_sur[2] = IMG_Load("../pics/reverse.png");
+    spell_sur[3] = IMG_Load("../pics/productivity.png");
     for(int i=0;i<4;i++){
         spell_tex[i] = SDL_CreateTextureFromSurface(sdlRenderer,spell_sur[i]);
         SDL_FreeSurface(spell_sur[i]);
@@ -548,17 +548,17 @@ int Run(int reg_count , int player_count , SDL_Renderer *sdlRenderer , int rando
     give_colors(regions , reg_count ,player_count , colors , random_or_not);
     srand(time(NULL));
     SDL_RendererFlip flip = SDL_FLIP_HORIZONTAL;
-    TTF_Font * font2 = TTF_OpenFont("fonts/Awake-the-Beauty.ttf" , 100);
-    SDL_Surface * bg_surface = IMG_Load("pics/grass.png");
+    TTF_Font * font2 = TTF_OpenFont("../fonts/Awake-the-Beauty.ttf" , 100);
+    SDL_Surface * bg_surface = IMG_Load("../pics/grass.png");
     SDL_Texture* backg = SDL_CreateTextureFromSurface(sdlRenderer, bg_surface);
     SDL_FreeSurface(bg_surface);
-    TTF_Font * font = TTF_OpenFont("fonts/arial.ttf" , 100);
-    SDL_Surface *surface_tower = IMG_Load("pics/tower.png");
-    SDL_Surface *arrow_sur = IMG_Load("pics/arrow.png");
-    SDL_Surface *ruins_sur = IMG_Load("pics/rock.png");
+    TTF_Font * font = TTF_OpenFont("../fonts/arial.ttf" , 100);
+    SDL_Surface *surface_tower = IMG_Load("../pics/tower.png");
+    SDL_Surface *arrow_sur = IMG_Load("../pics/arrow.png");
+    SDL_Surface *ruins_sur = IMG_Load("../pics/rock.png");
     SDL_Texture *ruins_tex = SDL_CreateTextureFromSurface(sdlRenderer, ruins_sur);
     SDL_FreeSurface(ruins_sur);
-    SDL_Surface *barracks_sur = IMG_Load("pics/barracks.png");
+    SDL_Surface *barracks_sur = IMG_Load("../pics/barracks.png");
     SDL_Texture *barracks_tex = SDL_CreateTextureFromSurface(sdlRenderer, barracks_sur);
     SDL_Texture *towers = SDL_CreateTextureFromSurface(sdlRenderer, surface_tower);
     SDL_Rect state_r = {250 , 150, 900 , 170};
@@ -584,7 +584,7 @@ int Run(int reg_count , int player_count , SDL_Renderer *sdlRenderer , int rando
         if(c != -1){
             SDL_Color state_color = {0,0,0,5};
             //if(start != NULL)Mix_FreeMusic(start);
-            start = Mix_LoadMUS("victory.mp3");
+            start = Mix_LoadMUS("../music/victory.mp3");
             if(start != NULL)Mix_PlayMusic(start,1);
             while(state_color.a <239) {
                 SDL_Surface *state_sur = TTF_RenderText_Solid(font2, "__Victory__", state_color);
